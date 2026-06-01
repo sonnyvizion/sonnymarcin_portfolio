@@ -10,6 +10,7 @@ const projects = [
     tags: ["Hospitality", "Booking"],
     yearLabel: "26'",
     color: "#7B6647",
+    heroVideo: `${import.meta.env.BASE_URL}img/arimont2.mp4`,
     heroImage: "https://picsum.photos/seed/arimont/2200/1400",
     detailImage: "https://picsum.photos/seed/arimont-detail/2200/1400",
     gallery: [
@@ -31,10 +32,11 @@ const projects = [
     tags: ["Identity", "Webflow"],
     yearLabel: "26'",
     color: "#B24774",
+    heroVideo: `${import.meta.env.BASE_URL}img/iphone-holora.mp4`,
     heroImage: "https://picsum.photos/seed/holora/2200/1400",
     detailImage: "https://picsum.photos/seed/holora-detail/2200/1400",
     gallery: [
-      "https://picsum.photos/seed/holora-1/640/420",
+      { type: "video", src: `${import.meta.env.BASE_URL}img/holora_FINAL.mp4` },
       "https://picsum.photos/seed/holora-2/640/420",
       "https://picsum.photos/seed/holora-3/640/420",
       "https://picsum.photos/seed/holora-4/640/420",
@@ -52,6 +54,7 @@ const projects = [
     tags: ["Art direction", "Motion"],
     yearLabel: "26'",
     color: "#D65A35",
+    heroVideo: `${import.meta.env.BASE_URL}img/ywp_home_1.mp4`,
     heroImage: "https://picsum.photos/seed/ywp/2200/1400",
     detailImage: "https://picsum.photos/seed/ywp-detail/2200/1400",
     gallery: [
@@ -70,13 +73,15 @@ const projects = [
     navTitle: "El Conciergio",
     title: "Conciergio",
     category: "Shopify website",
-    tags: ["Whatsapp app", "IA generation"],
+    tags: ["Concept & Design", "IA Génération", "Automatisation n8n", "Bot WhatsApp"],
     yearLabel: "26'",
     color: "#20C934",
-    heroImage: "https://picsum.photos/seed/conciergio/2200/1400",
-    detailImage: "https://picsum.photos/seed/conciergio-detail/2200/1400",
+    url: "https://elconciergio.com",
+    heroVideo: `${import.meta.env.BASE_URL}img/conciergio__home.mp4`,
+    heroImage: `${import.meta.env.BASE_URL}img/el-conciergio-home.webp`,
+    detailImage: `${import.meta.env.BASE_URL}img/el-conciegrio-pp.webp`,
     gallery: [
-      "https://picsum.photos/seed/conciergio-1/640/420",
+      { type: "video", src: `${import.meta.env.BASE_URL}img/el_conciergio_FINAL.mp4` },
       "https://picsum.photos/seed/conciergio-2/640/420",
       "https://picsum.photos/seed/conciergio-3/640/420",
       "https://picsum.photos/seed/conciergio-4/640/420",
@@ -84,7 +89,7 @@ const projects = [
       "https://picsum.photos/seed/conciergio-6/640/420",
     ],
     description:
-      "El Conciergio est un site vitrine one page concu pour presenter une solution de conciergerie automatisee via WhatsApp, pensee pour les Airbnb, gites, B&B et hebergements touristiques.",
+      "Conception complète d'El Conciergio, de l'idée au produit final. J'ai défini le concept, designé et développé le site, et généré l'intégralité des visuels et vidéos du site via IA. En parallèle, j'ai mis en place toute l'infrastructure d'automatisation : workflows n8n, paramétrage et entraînement du bot WhatsApp pour gérer les voyageurs en autonomie, 24h/24.",
   },
   {
     slug: "hormone-concept",
@@ -136,10 +141,11 @@ const projects = [
     tags: ["Brand", "CMS"],
     yearLabel: "26'",
     color: "#8E54E9",
+    heroVideo: `${import.meta.env.BASE_URL}img/brenda_home.mp4`,
     heroImage: "https://picsum.photos/seed/brenda/2200/1400",
     detailImage: "https://picsum.photos/seed/brenda-detail/2200/1400",
     gallery: [
-      "https://picsum.photos/seed/brenda-1/640/420",
+      { type: "video", src: `${import.meta.env.BASE_URL}img/brenda_home.mp4` },
       "https://picsum.photos/seed/brenda-2/640/420",
       "https://picsum.photos/seed/brenda-3/640/420",
       "https://picsum.photos/seed/brenda-4/640/420",
@@ -150,25 +156,24 @@ const projects = [
       "Une presence corporate temporaire, structuree autour d'une proposition claire, de contenus courts et d'une interface facile a maintenir.",
   },
   {
-    slug: "le-rougail",
-    navTitle: "Le Rougail",
-    title: "Le Rougail",
-    category: "Restaurant website",
-    tags: ["Booking", "Menu"],
+    slug: "sonnyvizion",
+    navTitle: "SonnyVizion",
+    title: "Sonny\nVizion",
+    category: "Creative tool",
+    tags: ["IA", "Génération vidéo"],
     yearLabel: "26'",
-    color: "#C43F2F",
-    heroImage: "https://picsum.photos/seed/rougail/2200/1400",
-    detailImage: "https://picsum.photos/seed/rougail-detail/2200/1400",
+    color: "#7d8478",
+    heroVideo: `${import.meta.env.BASE_URL}img/sonnyvizion2.mp4`,
+    heroImage: "https://picsum.photos/seed/sonnyvizion/2200/1400",
+    detailImage: "https://picsum.photos/seed/sonnyvizion-detail/2200/1400",
     gallery: [
-      "https://picsum.photos/seed/rougail-1/640/420",
-      "https://picsum.photos/seed/rougail-2/640/420",
-      "https://picsum.photos/seed/rougail-3/640/420",
-      "https://picsum.photos/seed/rougail-4/640/420",
-      "https://picsum.photos/seed/rougail-5/640/420",
-      "https://picsum.photos/seed/rougail-6/640/420",
+      { type: "video", src: `${import.meta.env.BASE_URL}img/sonnyvizion-home.mp4` },
+      "https://picsum.photos/seed/sonnyvizion-2/640/420",
+      "https://picsum.photos/seed/sonnyvizion-3/640/420",
+      "https://picsum.photos/seed/sonnyvizion-4/640/420",
     ],
     description:
-      "Un site restaurant temporaire pense pour faire comprendre l'ambiance, consulter rapidement la carte et declencher une reservation.",
+      "SonnyVizion est un projet en cours de developpement.",
   },
 ];
 
@@ -224,7 +229,7 @@ function getContactPanelRect() {
     ? Math.min(window.innerWidth - 40, 420)
     : Math.min(474, window.innerWidth - 136);
   const height = isMobile
-    ? Math.min(window.innerHeight - 96, 654)
+    ? Math.min(window.innerHeight - 160, 520)
     : Math.min(654, window.innerHeight - 136);
 
   return {
@@ -357,6 +362,9 @@ function ProjectCard({
   );
 }
 
+const getGallerySrc = (item) => (typeof item === "string" ? item : item.src);
+const isGalleryVideo = (item) => typeof item === "object" && item.type === "video";
+
 function App() {
   const [activeIndex, setActiveIndex] = useState(3);
   const [isLoading, setIsLoading] = useState(true);
@@ -365,12 +373,15 @@ function App() {
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [activeThumb, setActiveThumb] = useState(0);
   const [imageFocus, setImageFocus] = useState(false);
+  const [focusedVideo, setFocusedVideo] = useState(null);
   const [contactOpen, setContactOpen] = useState(false);
   const [contactTransitioning, setContactTransitioning] = useState(false);
   const [detailBg, setDetailBg] = useState(null);
   const [incomingDetailBg, setIncomingDetailBg] = useState(null);
   const stageRef = useRef(null);
   const slidesRef = useRef([]);
+  const videoRefs = useRef([]);
+  const videosReadyRef = useRef(false);
   const cardRef = useRef(null);
   const loaderRef = useRef(null);
   const loaderPanelRef = useRef(null);
@@ -431,13 +442,14 @@ function App() {
 
     const interval = window.setInterval(() => {
       setLoadProgress((current) => {
+        const cap = videosReadyRef.current ? 100 : 95;
         if (current >= 100) {
           window.clearInterval(interval);
           return 100;
         }
-
+        if (current >= cap) return current;
         const increment = current > 90 ? 1 : current > 62 ? 3 : 5;
-        return Math.min(100, current + increment);
+        return Math.min(cap, current + increment);
       });
     }, 96);
 
@@ -524,8 +536,8 @@ function App() {
         requestedDirection ?? (requestedIndex > activeIndex ? 1 : -1);
       const currentSlide = slidesRef.current[activeIndex];
       const nextSlide = slidesRef.current[nextIndex];
-      const currentImage = currentSlide.querySelector("img");
-      const nextImage = nextSlide.querySelector("img");
+      const currentImage = currentSlide.querySelector(".slide-media");
+      const nextImage = nextSlide.querySelector(".slide-media");
       if (!currentSlide || !nextSlide) return;
 
       scrollStateRef.current.lock = true;
@@ -659,6 +671,17 @@ function App() {
   }, []);
 
   useEffect(() => {
+    videoRefs.current.forEach((video, i) => {
+      if (!video) return;
+      if (i === activeIndex && !detailProject) {
+        video.play().catch(() => {});
+      } else {
+        video.pause();
+      }
+    });
+  }, [activeIndex, isLoading, detailProject]);
+
+  useEffect(() => {
     const onWheel = (event) => {
       if (isLoading || detailProject || isTransitioning || contactOpen) return;
       event.preventDefault();
@@ -748,6 +771,18 @@ function App() {
         height: sourceRect.height,
         backgroundColor: activeProject.color,
       });
+      const transitionTitle = transitionCard.querySelector(".project-card__title");
+      const transitionTags = transitionCard.querySelector(".project-card__tags");
+      const homeTitle = cardRef.current?.querySelector(".project-card__title");
+      const homeTags = cardRef.current?.querySelector(".project-card__tags");
+      if (transitionTitle && homeTitle) {
+        const titleRect = homeTitle.getBoundingClientRect();
+        gsap.set(transitionTitle, { width: titleRect.width, height: titleRect.height, overflow: "hidden" });
+      }
+      if (transitionTags && homeTags) {
+        const tagsWidth = homeTags.getBoundingClientRect().width;
+        gsap.set(transitionTags, { width: tagsWidth, flexWrap: "nowrap" });
+      }
       gsap.set(detailRef.current, { autoAlpha: 0 });
       gsap.set(".detail-view .identity, .back-button", { autoAlpha: 1 });
       gsap.set(".detail-focus-hide", { autoAlpha: 1 });
@@ -764,6 +799,8 @@ function App() {
             duration: reduceMotion ? 0.01 : 0.68,
           },
           onComplete: () => {
+            if (transitionTitle) gsap.set(transitionTitle, { width: "", height: "", overflow: "" });
+            if (transitionTags) gsap.set(transitionTags, { width: "", flexWrap: "" });
             gsap.set(transitionCard, { display: "none" });
             gsap.set(".detail-card-real", { autoAlpha: 1 });
             setIsTransitioning(false);
@@ -799,6 +836,7 @@ function App() {
   const closeProject = useCallback(() => {
     if (imageFocus) {
       setImageFocus(false);
+      setFocusedVideo(null);
       transitionDetailBackground(detailProject.detailImage);
       gsap
         .timeline({
@@ -915,7 +953,13 @@ function App() {
 
   const focusGalleryImage = (index) => {
     setActiveThumb(index);
-    transitionDetailBackground(detailProject.gallery[index]);
+    const item = detailProject.gallery[index];
+    if (isGalleryVideo(item)) {
+      setFocusedVideo(getGallerySrc(item));
+    } else {
+      setFocusedVideo(null);
+      transitionDetailBackground(getGallerySrc(item));
+    }
     if (imageFocus) return;
 
     setImageFocus(true);
@@ -1143,7 +1187,23 @@ function App() {
             className="project-slide"
             key={project.slug}
           >
-            <img src={project.heroImage} alt="" />
+            {project.heroVideo ? (
+              <video
+                ref={(el) => {
+                  videoRefs.current[index] = el;
+                  if (el && el.readyState >= 3) videosReadyRef.current = true;
+                }}
+                className="slide-media"
+                src={project.heroVideo}
+                muted
+                loop
+                playsInline
+                preload="auto"
+                onCanPlayThrough={() => { videosReadyRef.current = true; }}
+              />
+            ) : (
+              <img className="slide-media" src={project.heroImage} alt="" />
+            )}
             <span className="scrim" />
           </article>
         ))}
@@ -1295,6 +1355,17 @@ function App() {
                 alt=""
               />
             )}
+            {focusedVideo && (
+              <video
+                key={focusedVideo}
+                className="detail-video-focus"
+                src={focusedVideo}
+                muted
+                loop
+                playsInline
+                autoPlay
+              />
+            )}
             <span className="detail-scrim" />
             <span className="detail-bottom-tv" aria-hidden="true" />
             <Identity onClick={closeProject} />
@@ -1314,6 +1385,17 @@ function App() {
               hidden={isTransitioning}
               project={detailProject}
             />
+            {detailProject.url && (
+              <a
+                href={detailProject.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="project-card__hint project-card__live-link detail-focus-hide"
+              >
+                Voir le site live
+                <span />
+              </a>
+            )}
             <div ref={contentRef} className="detail-copy detail-focus-hide">
               <h1>{detailProject.navTitle}</h1>
               <p>{detailProject.description}</p>
@@ -1332,10 +1414,10 @@ function App() {
                 className="carousel-track"
                 onWheel={handleCarouselWheel}
               >
-                {detailProject.gallery.map((image, index) => (
+                {detailProject.gallery.map((item, index) => (
                   <button
                     className={index === activeThumb ? "is-active" : ""}
-                    key={image}
+                    key={getGallerySrc(item)}
                     onClick={(event) => {
                       focusGalleryImage(index);
                       event.currentTarget.scrollIntoView({
@@ -1346,7 +1428,17 @@ function App() {
                     }}
                     type="button"
                   >
-                    <img src={image} alt={`Apercu ${index + 1} du projet`} />
+                    {isGalleryVideo(item) ? (
+                      <video
+                        src={getGallerySrc(item)}
+                        muted
+                        loop
+                        playsInline
+                        autoPlay
+                      />
+                    ) : (
+                      <img src={getGallerySrc(item)} alt={`Apercu ${index + 1} du projet`} />
+                    )}
                   </button>
                 ))}
               </div>
