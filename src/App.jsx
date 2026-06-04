@@ -185,9 +185,9 @@ function getDetailCardRect() {
   if (isMobile) {
     return {
       left: 20,
-      top: window.innerHeight - 304,
+      top: window.innerHeight - 300,
       width: Math.min(window.innerWidth - 40, 420),
-      height: 244,
+      height: 300,
     };
   }
 
@@ -210,9 +210,9 @@ function getHomeCardRect(cardNode) {
   if (isMobile) {
     return {
       left: 20,
-      top: window.innerHeight - 348,
+      top: window.innerHeight - 404,
       width: window.innerWidth - 40,
-      height: 244,
+      height: 300,
     };
   }
 
@@ -789,10 +789,13 @@ function App() {
       const homeYear = cardRef.current?.querySelector(".project-card__year");
       if (transitionContent && homeContent) {
         const homeContentRect = homeContent.getBoundingClientRect();
+        const cardStyle = window.getComputedStyle(cardRef.current);
+        const padLeft = parseFloat(cardStyle.paddingLeft);
+        const padTop = parseFloat(cardStyle.paddingTop);
         gsap.set(transitionContent, {
           position: "absolute",
-          left: 40,
-          top: 30,
+          left: padLeft,
+          top: padTop,
           width: homeContentRect.width,
           height: homeContentRect.height,
           overflow: "visible",

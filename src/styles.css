@@ -204,6 +204,7 @@ button:hover .hover-image__secondary {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: 30% center;
 }
 
 .detail-video-focus {
@@ -540,7 +541,7 @@ button:hover .hover-image__secondary {
   position: absolute;
   left: calc(var(--outer) + 40px);
   bottom: calc(68px + 42px);
-  z-index: 19;
+  z-index: 26;
   text-decoration: none;
   pointer-events: auto;
 }
@@ -1089,17 +1090,19 @@ button:hover .hover-image__secondary {
     bottom: 104px;
     left: 20px;
     width: auto;
-    height: 244px;
+    height: 300px;
     padding: 22px;
+    overflow: visible;
   }
 
   .project-card--detail {
     right: 20px;
-    bottom: 60px;
+    bottom: 0;
     left: 20px;
     width: auto;
-    height: 244px;
+    height: 300px;
     padding: 22px;
+    overflow: visible;
   }
 
   .project-card--transition {
@@ -1143,7 +1146,7 @@ button:hover .hover-image__secondary {
   }
 
   .project-card__year strong {
-    font-size: 52px;
+    font-size: 38px;
   }
 
   .contact-button {
@@ -1184,6 +1187,11 @@ button:hover .hover-image__secondary {
     right: 20px;
   }
 
+  .project-card__live-link {
+    bottom: calc(0px + 22px);
+    left: calc(20px + 22px);
+  }
+
   .detail-copy {
     top: 118px;
     right: 20px;
@@ -1198,15 +1206,13 @@ button:hover .hover-image__secondary {
   }
 
   .detail-copy p {
-    max-height: 150px;
-    overflow: hidden;
-    font-size: 20px;
-    line-height: 1.12;
+    font-size: 16px;
+    line-height: 1.32;
   }
 
   .carousel {
     right: 20px;
-    bottom: 325px;
+    bottom: 302px;
     left: 20px;
     width: auto;
     padding-right: 34px;
