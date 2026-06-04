@@ -7,9 +7,9 @@ const projects = [
     navTitle: "Le Domaine d'Arimont",
     title: "Arimont",
     category: "Site vitrine",
-    tags: ["Hospitality", "Booking"],
+    tags: ["Direction artistique", "Développement", "Sanity CMS", "Retouche IA", "Vidéo IA"],
     yearLabel: "26'",
-    color: "#7B6647",
+    color: "#2A5843",
     heroVideo: `${import.meta.env.BASE_URL}img/arimont2.mp4`,
     heroImage: "https://picsum.photos/seed/arimont/2200/1400",
     detailImage: "https://picsum.photos/seed/arimont-detail/2200/1400",
@@ -22,14 +22,14 @@ const projects = [
       "https://picsum.photos/seed/arimont-6/640/420",
     ],
     description:
-      "Une experience digitale temporaire pour presenter un lieu, clarifier son positionnement et guider les visiteurs vers une prise de contact simple.",
+      "Conception complète du site vitrine du Domaine d'Arimont, un refuge niché dans les Ardennes belges. J'ai pris en charge la DA, le design et le développement sur Sanity CMS, et réhabilité des photos client basse résolution via IA pour en tirer des visuels premium et des séquences vidéo immersives.",
   },
   {
     slug: "holora",
     navTitle: "Holora",
     title: "Holora",
-    category: "Brand website",
-    tags: ["Identity", "Webflow"],
+    category: "Shopify Custom",
+    tags: ["Direction artistique", "Shopify Custom", "Vidéo & Visuels IA"],
     yearLabel: "26'",
     color: "#B24774",
     heroVideo: `${import.meta.env.BASE_URL}img/iphone-holora.mp4`,
@@ -44,14 +44,14 @@ const projects = [
       "https://picsum.photos/seed/holora-6/640/420",
     ],
     description:
-      "Un univers de marque deploye sur une interface claire, avec une attention particuliere portee au rythme, aux contrastes et a la conversion.",
+      "Boutique e-commerce Shopify avec thème entièrement custom pour la vente de cartes TCG Pokémon et One Piece. J'ai pris en charge la DA, le design et le développement du store, avec création de visuels et vidéos IA pour habiller l'univers de la marque.",
   },
   {
     slug: "young-wild-pixels",
     navTitle: "Young, Wild & Pixels",
     title: "Young, Wild & Pixels",
-    category: "Creative platform",
-    tags: ["Art direction", "Motion"],
+    category: "Site vitrine",
+    tags: ["Direction artistique", "Développement", "Sanity CMS"],
     yearLabel: "26'",
     color: "#D65A35",
     heroVideo: `${import.meta.env.BASE_URL}img/ywp_home_1.mp4`,
@@ -66,7 +66,7 @@ const projects = [
       "https://picsum.photos/seed/ywp-6/640/420",
     ],
     description:
-      "Une direction interactive expressive, concue pour donner de l'impact aux contenus tout en gardant une navigation rapide et lisible.",
+      "Site vitrine de mon compte auto-entrepreneur, Young Wild & Pixels. J'ai pris en charge la DA et la conception complète, avec un back-office Sanity pour une gestion de contenu autonome et évolutive.",
   },
   {
     slug: "el-conciergio",
@@ -95,10 +95,11 @@ const projects = [
     slug: "hormone-concept",
     navTitle: "Hormone Concept",
     title: "Hormone Concept",
-    category: "Shopify website",
-    tags: ["Shopify", "IA generation"],
+    category: "Shopify Custom",
+    tags: ["Direction artistique", "Shopify Custom", "App scrapping"],
     yearLabel: "26'",
-    color: "#2F86E9",
+    color: "#829DAD",
+    heroVideo: `${import.meta.env.BASE_URL}img/hromone_home_1.mp4`,
     heroImage: "https://picsum.photos/seed/hormone/2200/1400",
     detailImage: "https://picsum.photos/seed/hormone-detail/2200/1400",
     gallery: [
@@ -110,16 +111,17 @@ const projects = [
       "https://picsum.photos/seed/hormone-6/640/420",
     ],
     description:
-      "Une boutique conceptuelle temporaire pour presenter une selection produit, installer un imaginaire fort et guider l'utilisateur vers l'achat.",
+      "Boutique de revente sneakers sur Shopify avec un thème custom pensé pour une mise en valeur produit tendue et immédiate. Même infrastructure qu'une app de scrapping dédiée pour automatiser l'ajout de paires au catalogue.",
   },
   {
     slug: "kozy-sneakers",
     navTitle: "Kozy Sneakers",
     title: "Kozy Sneakers",
-    category: "E-commerce",
-    tags: ["Shopify", "Sneakers"],
+    category: "Shopify Custom",
+    tags: ["Direction artistique", "Shopify Custom", "App scrapping"],
     yearLabel: "26'",
     color: "#4E58B8",
+    heroVideo: `${import.meta.env.BASE_URL}img/kozy_mockup.mp4`,
     heroImage: "https://picsum.photos/seed/kozy/2200/1400",
     detailImage: "https://picsum.photos/seed/kozy-detail/2200/1400",
     gallery: [
@@ -131,16 +133,17 @@ const projects = [
       "https://picsum.photos/seed/kozy-6/640/420",
     ],
     description:
-      "Une experience e-commerce temporaire avec une lecture produit immediate, une direction visuelle tendue et un tunnel simplifie.",
+      "Thème Shopify entièrement custom pour une boutique de revente de sneakers. J'ai pris en charge la DA, le design et le développement du store, avec une app de scrapping sur-mesure pour alimenter le catalogue en nouvelles paires automatiquement.",
   },
   {
     slug: "brenda-company",
     navTitle: "Brenda Company",
     title: "Brenda Company",
     category: "Corporate website",
-    tags: ["Brand", "CMS"],
-    yearLabel: "26'",
-    color: "#8E54E9",
+    tags: ["Direction artistique", "Webflow", "Identité visuelle"],
+    yearLabel: "23'",
+    color: "#FFFFFF",
+    textColor: "#000000",
     heroVideo: `${import.meta.env.BASE_URL}img/brenda_home.mp4`,
     heroImage: "https://picsum.photos/seed/brenda/2200/1400",
     detailImage: "https://picsum.photos/seed/brenda-detail/2200/1400",
@@ -153,15 +156,15 @@ const projects = [
       "https://picsum.photos/seed/brenda-6/640/420",
     ],
     description:
-      "Une presence corporate temporaire, structuree autour d'une proposition claire, de contenus courts et d'une interface facile a maintenir.",
+      "Direction artistique et développement Webflow pour Brenda, agence logistique audiovisuelle parisienne au service des grandes maisons — Zara, Louis Vuitton, Nike, Lancôme. Un site épuré et confiant, taillé pour un positionnement premium.",
   },
   {
     slug: "sonnyvizion",
     navTitle: "SonnyVizion",
     title: "Sonny\nVizion",
     category: "Creative tool",
-    tags: ["IA", "Génération vidéo"],
-    yearLabel: "26'",
+    tags: ["Direction artistique", "Webflow", "Awwwards HM"],
+    yearLabel: "23'",
     color: "#7d8478",
     heroVideo: `${import.meta.env.BASE_URL}img/sonnyvizion2.mp4`,
     heroImage: "https://picsum.photos/seed/sonnyvizion/2200/1400",
@@ -173,7 +176,7 @@ const projects = [
       "https://picsum.photos/seed/sonnyvizion-4/640/420",
     ],
     description:
-      "SonnyVizion est un projet en cours de developpement.",
+      "Mon portfolio de 2023, conçu et développé sur Webflow. Un design minimaliste noir et blanc construit autour d'une typographie forte et d'une identité personnelle assumée. Récompensé d'une Honorable Mention Awwwards.",
   },
 ];
 
@@ -325,7 +328,7 @@ function ProjectCard({
     <button
       ref={forwardedRef}
       className={`project-card ${className}`}
-      style={{ backgroundColor: project.color }}
+      style={{ backgroundColor: project.color, color: project.textColor || undefined }}
       onClick={onClick}
       type="button"
       aria-label={`Voir le projet ${project.navTitle}`}
@@ -364,6 +367,14 @@ function ProjectCard({
 
 const getGallerySrc = (item) => (typeof item === "string" ? item : item.src);
 const isGalleryVideo = (item) => typeof item === "object" && item.type === "video";
+
+function getFullGallery(project) {
+  if (!project.heroVideo) return project.gallery;
+  const first = project.gallery[0];
+  const firstSrc = typeof first === "string" ? first : first?.src;
+  if (firstSrc === project.heroVideo) return project.gallery;
+  return [{ type: "video", src: project.heroVideo }, ...project.gallery];
+}
 
 function App() {
   const [activeIndex, setActiveIndex] = useState(3);
@@ -770,18 +781,33 @@ function App() {
         width: sourceRect.width,
         height: sourceRect.height,
         backgroundColor: activeProject.color,
+        color: activeProject.textColor || "#ffffff",
       });
-      const transitionTitle = transitionCard.querySelector(".project-card__title");
-      const transitionTags = transitionCard.querySelector(".project-card__tags");
-      const homeTitle = cardRef.current?.querySelector(".project-card__title");
-      const homeTags = cardRef.current?.querySelector(".project-card__tags");
-      if (transitionTitle && homeTitle) {
-        const titleRect = homeTitle.getBoundingClientRect();
-        gsap.set(transitionTitle, { width: titleRect.width, height: titleRect.height, overflow: "hidden" });
+      const transitionContent = transitionCard.querySelector(".project-card__content");
+      const homeContent = cardRef.current?.querySelector(".project-card__content");
+      const transitionYear = transitionCard.querySelector(".project-card__year");
+      const homeYear = cardRef.current?.querySelector(".project-card__year");
+      if (transitionContent && homeContent) {
+        const homeContentRect = homeContent.getBoundingClientRect();
+        gsap.set(transitionContent, {
+          position: "absolute",
+          left: 40,
+          top: 30,
+          width: homeContentRect.width,
+          height: homeContentRect.height,
+          overflow: "visible",
+        });
       }
-      if (transitionTags && homeTags) {
-        const tagsWidth = homeTags.getBoundingClientRect().width;
-        gsap.set(transitionTags, { width: tagsWidth, flexWrap: "nowrap" });
+      if (transitionYear && homeYear && homeContent) {
+        const homeContentRect = homeContent.getBoundingClientRect();
+        const yearRect = homeYear.getBoundingClientRect();
+        gsap.set(transitionYear, {
+          position: "absolute",
+          left: yearRect.left - homeContentRect.left,
+          top: yearRect.top - homeContentRect.top,
+          marginTop: 0,
+          marginLeft: 0,
+        });
       }
       gsap.set(detailRef.current, { autoAlpha: 0 });
       gsap.set(".detail-view .identity, .back-button", { autoAlpha: 1 });
@@ -799,8 +825,8 @@ function App() {
             duration: reduceMotion ? 0.01 : 0.68,
           },
           onComplete: () => {
-            if (transitionTitle) gsap.set(transitionTitle, { width: "", height: "", overflow: "" });
-            if (transitionTags) gsap.set(transitionTags, { width: "", flexWrap: "" });
+            if (transitionContent) gsap.set(transitionContent, { clearProps: "position,left,top,width,height,overflow" });
+            if (transitionYear) gsap.set(transitionYear, { clearProps: "position,left,top,marginTop,marginLeft" });
             gsap.set(transitionCard, { display: "none" });
             gsap.set(".detail-card-real", { autoAlpha: 1 });
             setIsTransitioning(false);
@@ -869,6 +895,7 @@ function App() {
       width: sourceRect.width,
       height: sourceRect.height,
       backgroundColor: project.color,
+      color: project.textColor || "#ffffff",
     });
     gsap.set(detailCard, { autoAlpha: 0 });
     gsap.set(cardRef.current, { autoAlpha: 0 });
@@ -953,7 +980,7 @@ function App() {
 
   const focusGalleryImage = (index) => {
     setActiveThumb(index);
-    const item = detailProject.gallery[index];
+    const item = getFullGallery(detailProject)[index];
     if (isGalleryVideo(item)) {
       setFocusedVideo(getGallerySrc(item));
     } else {
@@ -1274,7 +1301,7 @@ function App() {
           ref={contactButtonRef}
           className="contact-button"
           onClick={openContact}
-          style={{ backgroundColor: activeProject.color }}
+          style={{ backgroundColor: activeProject.color, color: activeProject.textColor || undefined }}
           type="button"
         >
           Contact
@@ -1375,6 +1402,8 @@ function App() {
               style={{
                 "--project-color": detailProject.color,
                 backgroundColor: detailProject.color,
+                color: detailProject.textColor || undefined,
+                borderColor: detailProject.textColor ? `${detailProject.textColor}cc` : undefined,
               }}
               type="button"
             >
@@ -1414,7 +1443,7 @@ function App() {
                 className="carousel-track"
                 onWheel={handleCarouselWheel}
               >
-                {detailProject.gallery.map((item, index) => (
+                {getFullGallery(detailProject).map((item, index) => (
                   <button
                     className={index === activeThumb ? "is-active" : ""}
                     key={getGallerySrc(item)}

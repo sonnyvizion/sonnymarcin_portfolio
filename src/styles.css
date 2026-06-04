@@ -489,7 +489,7 @@ button:hover .hover-image__secondary {
 .project-card__tags span {
   min-height: 29px;
   padding: 7px 16px 0;
-  border: 1px solid rgba(255, 255, 255, 0.92);
+  border: 1px solid currentColor;
   border-radius: 999px;
   white-space: nowrap;
 }
@@ -501,7 +501,7 @@ button:hover .hover-image__secondary {
   display: inline-flex;
   align-items: center;
   gap: 9px;
-  color: rgba(255, 255, 255, 0.72);
+  color: currentColor;
   font-size: 12px;
   font-weight: 700;
   line-height: 1;
@@ -523,7 +523,6 @@ button:hover .hover-image__secondary {
 .project-card--home:hover .project-card__hint,
 .project-card--home:focus-visible .project-card__hint {
   opacity: 1;
-  color: #ffffff;
   transform: translateX(2px);
 }
 
@@ -1006,10 +1005,6 @@ button:hover .hover-image__secondary {
   background: transparent;
 }
 
-.transition-card .project-card__title {
-  max-width: min(394px, 24vw);
-  white-space: nowrap;
-}
 
 :focus-visible {
   outline: 2px solid #ffffff;
