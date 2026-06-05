@@ -155,7 +155,7 @@ const projects = [
       `${import.meta.env.BASE_URL}img/brenda-4.jpg`,
     ],
     description:
-      "Direction artistique et développement Webflow pour Brenda, agence logistique audiovisuelle parisienne au service des grandes maisons — Zara, Louis Vuitton, Nike, Lancôme. Un site épuré et confiant, taillé pour un positionnement premium.",
+      "Direction artistique et développement Webflow pour Brenda, agence logistique audiovisuelle parisienne au service des grandes maisons : Zara, Louis Vuitton, Nike, Lancôme. Un site épuré et confiant, taillé pour un positionnement premium.",
   },
   {
     slug: "sonnyvizion",
