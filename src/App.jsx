@@ -7,19 +7,17 @@ const projects = [
     navTitle: "Le Domaine d'Arimont",
     title: "Arimont",
     category: "Site vitrine",
+    url: "https://sonnyvizion.github.io/lasourcedarimont/index.html",
     tags: ["Direction artistique", "Développement", "Sanity CMS", "Retouche IA", "Vidéo IA"],
     yearLabel: "26'",
     color: "#2A5843",
     heroVideo: `${import.meta.env.BASE_URL}img/arimont2.mp4`,
     heroImage: "https://picsum.photos/seed/arimont/2200/1400",
-    detailImage: "https://picsum.photos/seed/arimont-detail/2200/1400",
+    detailImage: `${import.meta.env.BASE_URL}img/raidillon.webp`,
     gallery: [
-      "https://picsum.photos/seed/arimont-1/640/420",
-      "https://picsum.photos/seed/arimont-2/640/420",
-      "https://picsum.photos/seed/arimont-3/640/420",
-      "https://picsum.photos/seed/arimont-4/640/420",
-      "https://picsum.photos/seed/arimont-5/640/420",
-      "https://picsum.photos/seed/arimont-6/640/420",
+      { type: "video", src: `${import.meta.env.BASE_URL}img/arimont_projet_01.mp4` },
+      { type: "video", src: `${import.meta.env.BASE_URL}img/arimont_projet02.mp4` },
+      `${import.meta.env.BASE_URL}img/arimont_projet03.jpg`,
     ],
     description:
       "Conception complète du site vitrine du Domaine d'Arimont, un refuge niché dans les Ardennes belges. J'ai pris en charge la DA, le design et le développement sur Sanity CMS, et réhabilité des photos client basse résolution via IA pour en tirer des visuels premium et des séquences vidéo immersives.",
@@ -29,6 +27,7 @@ const projects = [
     navTitle: "Holora",
     title: "Holora",
     category: "Shopify Custom",
+    url: "https://holora.net/",
     tags: ["Direction artistique", "Shopify Custom", "Vidéo & Visuels IA"],
     yearLabel: "26'",
     color: "#B24774",
@@ -37,11 +36,11 @@ const projects = [
     detailImage: "https://picsum.photos/seed/holora-detail/2200/1400",
     gallery: [
       { type: "video", src: `${import.meta.env.BASE_URL}img/holora_FINAL.mp4` },
+      { type: "video", src: `${import.meta.env.BASE_URL}img/holora_project01.mp4` },
       "https://picsum.photos/seed/holora-2/640/420",
       "https://picsum.photos/seed/holora-3/640/420",
       "https://picsum.photos/seed/holora-4/640/420",
       "https://picsum.photos/seed/holora-5/640/420",
-      "https://picsum.photos/seed/holora-6/640/420",
     ],
     description:
       "Boutique e-commerce Shopify avec thème entièrement custom pour la vente de cartes TCG Pokémon et One Piece. J'ai pris en charge la DA, le design et le développement du store, avec création de visuels et vidéos IA pour habiller l'univers de la marque.",
@@ -51,6 +50,7 @@ const projects = [
     navTitle: "Young, Wild & Pixels",
     title: "Young, Wild & Pixels",
     category: "Site vitrine",
+    url: "https://youngwildandpixels.com/fr/index.html",
     tags: ["Direction artistique", "Développement", "Sanity CMS"],
     yearLabel: "26'",
     color: "#D65A35",
@@ -81,12 +81,10 @@ const projects = [
     heroImage: `${import.meta.env.BASE_URL}img/el-conciergio-home.webp`,
     detailImage: `${import.meta.env.BASE_URL}img/el-conciegrio-pp.webp`,
     gallery: [
-      { type: "video", src: `${import.meta.env.BASE_URL}img/el_conciergio_FINAL.mp4` },
-      "https://picsum.photos/seed/conciergio-2/640/420",
-      "https://picsum.photos/seed/conciergio-3/640/420",
-      "https://picsum.photos/seed/conciergio-4/640/420",
-      "https://picsum.photos/seed/conciergio-5/640/420",
-      "https://picsum.photos/seed/conciergio-6/640/420",
+      { type: "video", src: `${import.meta.env.BASE_URL}img/conciergio_projet01.mp4` },
+      { type: "video", src: `${import.meta.env.BASE_URL}img/conciergio_projet02.mp4` },
+      { type: "video", src: `${import.meta.env.BASE_URL}img/conciergio_projet03.mp4` },
+      `${import.meta.env.BASE_URL}img/conciergio_projet05.jpg`,
     ],
     description:
       "Conception complète d'El Conciergio, de l'idée au produit final. J'ai défini le concept, designé et développé le site, et généré l'intégralité des visuels et vidéos du site via IA. En parallèle, j'ai mis en place toute l'infrastructure d'automatisation : workflows n8n, paramétrage et entraînement du bot WhatsApp pour gérer les voyageurs en autonomie, 24h/24.",
@@ -96,6 +94,7 @@ const projects = [
     navTitle: "Hormone Concept",
     title: "Hormone Concept",
     category: "Shopify Custom",
+    comingSoon: true,
     tags: ["Direction artistique", "Shopify Custom", "App scrapping"],
     yearLabel: "26'",
     color: "#829DAD",
@@ -103,7 +102,7 @@ const projects = [
     heroImage: "https://picsum.photos/seed/hormone/2200/1400",
     detailImage: "https://picsum.photos/seed/hormone-detail/2200/1400",
     gallery: [
-      "https://picsum.photos/seed/hormone-1/640/420",
+      { type: "video", src: `${import.meta.env.BASE_URL}img/hormone_projet01.mp4` },
       "https://picsum.photos/seed/hormone-2/640/420",
       "https://picsum.photos/seed/hormone-3/640/420",
       "https://picsum.photos/seed/hormone-4/640/420",
@@ -118,6 +117,7 @@ const projects = [
     navTitle: "Kozy Sneakers",
     title: "Kozy Sneakers",
     category: "Shopify Custom",
+    comingSoon: true,
     tags: ["Direction artistique", "Shopify Custom", "App scrapping"],
     yearLabel: "26'",
     color: "#4E58B8",
@@ -140,20 +140,19 @@ const projects = [
     navTitle: "Brenda Company",
     title: "Brenda Company",
     category: "Corporate website",
+    url: "https://brendaprod.webflow.io/",
     tags: ["Direction artistique", "Webflow", "Identité visuelle"],
     yearLabel: "23'",
     color: "#FFFFFF",
     textColor: "#000000",
     heroVideo: `${import.meta.env.BASE_URL}img/brenda_home.mp4`,
     heroImage: "https://picsum.photos/seed/brenda/2200/1400",
-    detailImage: "https://picsum.photos/seed/brenda-detail/2200/1400",
+    detailImage: `${import.meta.env.BASE_URL}img/home_brenda.jpg`,
     gallery: [
-      { type: "video", src: `${import.meta.env.BASE_URL}img/brenda_home.mp4` },
-      "https://picsum.photos/seed/brenda-2/640/420",
-      "https://picsum.photos/seed/brenda-3/640/420",
-      "https://picsum.photos/seed/brenda-4/640/420",
-      "https://picsum.photos/seed/brenda-5/640/420",
-      "https://picsum.photos/seed/brenda-6/640/420",
+      `${import.meta.env.BASE_URL}img/brenda-1.jpg`,
+      `${import.meta.env.BASE_URL}img/brenda-2.jpg`,
+      `${import.meta.env.BASE_URL}img/brenda-3.jpg`,
+      `${import.meta.env.BASE_URL}img/brenda-4.jpg`,
     ],
     description:
       "Direction artistique et développement Webflow pour Brenda, agence logistique audiovisuelle parisienne au service des grandes maisons — Zara, Louis Vuitton, Nike, Lancôme. Un site épuré et confiant, taillé pour un positionnement premium.",
@@ -163,17 +162,20 @@ const projects = [
     navTitle: "SonnyVizion",
     title: "Sonny\nVizion",
     category: "Creative tool",
+    url: "https://sonny-vizion.webflow.io/",
     tags: ["Direction artistique", "Webflow", "Awwwards HM"],
     yearLabel: "23'",
     color: "#7d8478",
     heroVideo: `${import.meta.env.BASE_URL}img/sonnyvizion2.mp4`,
     heroImage: "https://picsum.photos/seed/sonnyvizion/2200/1400",
-    detailImage: "https://picsum.photos/seed/sonnyvizion-detail/2200/1400",
+    detailImage: `${import.meta.env.BASE_URL}img/work-3.jpg`,
     gallery: [
-      { type: "video", src: `${import.meta.env.BASE_URL}img/sonnyvizion-home.mp4` },
-      "https://picsum.photos/seed/sonnyvizion-2/640/420",
-      "https://picsum.photos/seed/sonnyvizion-3/640/420",
-      "https://picsum.photos/seed/sonnyvizion-4/640/420",
+      `${import.meta.env.BASE_URL}img/pf02.jpg`,
+      `${import.meta.env.BASE_URL}img/pf03.jpg`,
+      `${import.meta.env.BASE_URL}img/pf04.jpg`,
+      `${import.meta.env.BASE_URL}img/pf05.jpg`,
+      `${import.meta.env.BASE_URL}img/pf06.jpg`,
+      `${import.meta.env.BASE_URL}img/pf07.jpg`,
     ],
     description:
       "Mon portfolio de 2023, conçu et développé sur Webflow. Un design minimaliste noir et blanc construit autour d'une typographie forte et d'une identité personnelle assumée. Récompensé d'une Honorable Mention Awwwards.",
@@ -365,6 +367,37 @@ function ProjectCard({
   );
 }
 
+const SCRAMBLE_CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+const SCRAMBLE_TARGET = "PORTFOLIO";
+
+function useScramble(duration = 1400) {
+  const [text, setText] = useState(() =>
+    Array.from({ length: SCRAMBLE_TARGET.length }, () =>
+      SCRAMBLE_CHARS[Math.floor(Math.random() * SCRAMBLE_CHARS.length)]
+    ).join("")
+  );
+
+  useEffect(() => {
+    const start = Date.now();
+    let frame;
+    const tick = () => {
+      const elapsed = Date.now() - start;
+      const progress = Math.min(elapsed / duration, 1);
+      const locked = Math.floor(progress * SCRAMBLE_TARGET.length);
+      setText(
+        SCRAMBLE_TARGET.split("").map((char, i) =>
+          i < locked ? char : SCRAMBLE_CHARS[Math.floor(Math.random() * SCRAMBLE_CHARS.length)]
+        ).join("")
+      );
+      if (progress < 1) frame = requestAnimationFrame(tick);
+    };
+    frame = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(frame);
+  }, [duration]);
+
+  return text;
+}
+
 const getGallerySrc = (item) => (typeof item === "string" ? item : item.src);
 const isGalleryVideo = (item) => typeof item === "object" && item.type === "video";
 
@@ -389,6 +422,7 @@ function App() {
   const [contactTransitioning, setContactTransitioning] = useState(false);
   const [detailBg, setDetailBg] = useState(null);
   const [incomingDetailBg, setIncomingDetailBg] = useState(null);
+  const scrambledPortfolio = useScramble(1400);
   const stageRef = useRef(null);
   const slidesRef = useRef([]);
   const videoRefs = useRef([]);
@@ -866,7 +900,9 @@ function App() {
     if (imageFocus) {
       setImageFocus(false);
       setFocusedVideo(null);
-      transitionDetailBackground(detailProject.detailImage);
+      gsap.killTweensOf(".detail-bg-next");
+      setIncomingDetailBg(null);
+      setDetailBg(detailProject.detailImage);
       gsap
         .timeline({
           defaults: {
@@ -1250,7 +1286,7 @@ function App() {
               </div>
               <div className="loader__center">
                 <span>2026</span>
-                <strong>Portfolio</strong>
+                <strong>{scrambledPortfolio}</strong>
               </div>
               <div className="loader__progress">
                 <span>Loading</span>
@@ -1417,7 +1453,7 @@ function App() {
               hidden={isTransitioning}
               project={detailProject}
             />
-            {detailProject.url && (
+            {detailProject.url ? (
               <a
                 href={detailProject.url}
                 target="_blank"
@@ -1427,7 +1463,11 @@ function App() {
                 Voir le site live
                 <span />
               </a>
-            )}
+            ) : detailProject.comingSoon ? (
+              <span className="project-card__hint project-card__live-link detail-focus-hide" style={{ opacity: 0.5, cursor: "default" }}>
+                Site coming soon
+              </span>
+            ) : null}
             <div ref={contentRef} className="detail-copy detail-focus-hide">
               <h1>{detailProject.navTitle}</h1>
               <p>{detailProject.description}</p>

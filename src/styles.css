@@ -156,7 +156,6 @@ button:hover .hover-image__secondary {
 }
 
 .loader__center strong {
-  font-family: var(--display-font);
   font-size: clamp(72px, 6vw, 96px);
   font-weight: 800;
   line-height: 0.9;
