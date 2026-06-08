@@ -852,12 +852,23 @@ button:hover .hover-image__secondary {
   inset: 0;
 }
 
-.detail-bg-current {
+.detail-bg-blur {
   z-index: 0;
+  object-fit: cover;
+  filter: blur(32px);
+  transform: scale(1.1);
+}
+
+.detail-bg-current {
+  z-index: 1;
+}
+
+.detail-bg--portrait {
+  object-fit: contain;
 }
 
 .detail-bg-next {
-  z-index: 1;
+  z-index: 2;
   visibility: hidden;
 }
 
@@ -944,6 +955,21 @@ button:hover .hover-image__secondary {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+.carousel-blur-bg {
+  position: absolute;
+  inset: 0;
+  object-fit: cover;
+  filter: blur(18px);
+  transform: scale(1.12);
+  z-index: 0;
+}
+
+.carousel-track button.is-portrait img:not(.carousel-blur-bg) {
+  object-fit: contain;
+  position: relative;
+  z-index: 1;
 }
 
 .carousel-control {

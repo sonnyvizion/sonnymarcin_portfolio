@@ -33,10 +33,11 @@ const projects = [
     color: "#B24774",
     heroVideo: `${import.meta.env.BASE_URL}img/iphone-holora.mp4`,
     heroImage: "https://picsum.photos/seed/holora/2200/1400",
-    detailImage: "https://picsum.photos/seed/holora-detail/2200/1400",
+    detailImage: `${import.meta.env.BASE_URL}img/mockup_holora_bg.webp`,
     gallery: [
-      { type: "video", src: `${import.meta.env.BASE_URL}img/holora_FINAL.mp4` },
       { type: "video", src: `${import.meta.env.BASE_URL}img/holora_project01.mp4` },
+      `${import.meta.env.BASE_URL}img/mockup_holora_bg.webp`,
+      `${import.meta.env.BASE_URL}img/bannerv3.jpg`,
       "https://picsum.photos/seed/holora-2/640/420",
       "https://picsum.photos/seed/holora-3/640/420",
       "https://picsum.photos/seed/holora-4/640/420",
@@ -100,17 +101,17 @@ const projects = [
     color: "#829DAD",
     heroVideo: `${import.meta.env.BASE_URL}img/hromone_home_1.mp4`,
     heroImage: "https://picsum.photos/seed/hormone/2200/1400",
-    detailImage: "https://picsum.photos/seed/hormone-detail/2200/1400",
+    detailImage: `${import.meta.env.BASE_URL}img/hormone_bg.webp`,
     gallery: [
       { type: "video", src: `${import.meta.env.BASE_URL}img/hormone_projet01.mp4` },
+      `${import.meta.env.BASE_URL}img/hormone_01.webp`,
+      `${import.meta.env.BASE_URL}img/hormone_02.webp`,
       "https://picsum.photos/seed/hormone-2/640/420",
       "https://picsum.photos/seed/hormone-3/640/420",
       "https://picsum.photos/seed/hormone-4/640/420",
-      "https://picsum.photos/seed/hormone-5/640/420",
-      "https://picsum.photos/seed/hormone-6/640/420",
     ],
     description:
-      "Boutique de revente sneakers sur Shopify avec un thème custom pensé pour une mise en valeur produit tendue et immédiate. Même infrastructure qu'une app de scrapping dédiée pour automatiser l'ajout de paires au catalogue.",
+      "Boutique de revente sneakers sur Shopify avec un thème custom pensé pour une mise en valeur produit tendue et immédiate. Même infrastructure qu'une app de scrapping dédiée pour automatiser l'ajout de paires au catalogue. Réalisation de street shooting IA.",
   },
   {
     slug: "kozy-sneakers",
@@ -121,16 +122,17 @@ const projects = [
     tags: ["Direction artistique", "Shopify Custom", "App scrapping"],
     yearLabel: "26'",
     color: "#4E58B8",
-    heroVideo: `${import.meta.env.BASE_URL}img/kozy_mockup.mp4`,
+    heroVideo: `${import.meta.env.BASE_URL}img/kozy_left.mp4`,
     heroImage: "https://picsum.photos/seed/kozy/2200/1400",
-    detailImage: "https://picsum.photos/seed/kozy-detail/2200/1400",
+    detailImage: `${import.meta.env.BASE_URL}img/kozy_00000.webp`,
     gallery: [
+      { type: "video", src: `${import.meta.env.BASE_URL}img/kozy_mockup.mp4` },
+      `${import.meta.env.BASE_URL}img/kozy_01.webp`,
+      `${import.meta.env.BASE_URL}img/kozy02.webp`,
       "https://picsum.photos/seed/kozy-1/640/420",
       "https://picsum.photos/seed/kozy-2/640/420",
       "https://picsum.photos/seed/kozy-3/640/420",
       "https://picsum.photos/seed/kozy-4/640/420",
-      "https://picsum.photos/seed/kozy-5/640/420",
-      "https://picsum.photos/seed/kozy-6/640/420",
     ],
     description:
       "Thème Shopify entièrement custom pour une boutique de revente de sneakers. J'ai pris en charge la DA, le design et le développement du store, avec une app de scrapping sur-mesure pour alimenter le catalogue en nouvelles paires automatiquement.",
@@ -401,6 +403,44 @@ function useScramble(duration = 1400) {
 const getGallerySrc = (item) => (typeof item === "string" ? item : item.src);
 const isGalleryVideo = (item) => typeof item === "object" && item.type === "video";
 
+function CarouselThumb({ item, isActive, onActivate, portraitSrcsRef }) {
+  const [isPortrait, setIsPortrait] = useState(false);
+  const src = getGallerySrc(item);
+
+  const handleClick = (event) => {
+    onActivate();
+    event.currentTarget.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "nearest" });
+  };
+
+  if (isGalleryVideo(item)) {
+    return (
+      <button className={isActive ? "is-active" : ""} onClick={handleClick} type="button">
+        <video src={src} muted loop playsInline autoPlay />
+      </button>
+    );
+  }
+
+  return (
+    <button
+      className={[isActive ? "is-active" : "", isPortrait ? "is-portrait" : ""].filter(Boolean).join(" ")}
+      onClick={handleClick}
+      type="button"
+    >
+      {isPortrait && <img className="carousel-blur-bg" src={src} aria-hidden="true" alt="" />}
+      <img
+        src={src}
+        alt=""
+        onLoad={(e) => {
+          if (e.target.naturalHeight > e.target.naturalWidth) {
+            setIsPortrait(true);
+            portraitSrcsRef.current.add(src);
+          }
+        }}
+      />
+    </button>
+  );
+}
+
 function getFullGallery(project) {
   if (!project.heroVideo) return project.gallery;
   const first = project.gallery[0];
@@ -422,6 +462,8 @@ function App() {
   const [contactTransitioning, setContactTransitioning] = useState(false);
   const [detailBg, setDetailBg] = useState(null);
   const [incomingDetailBg, setIncomingDetailBg] = useState(null);
+  const [detailBgPortrait, setDetailBgPortrait] = useState(false);
+  const portraitSrcsRef = useRef(new Set());
   const scrambledPortfolio = useScramble(1400);
   const stageRef = useRef(null);
   const slidesRef = useRef([]);
@@ -543,7 +585,7 @@ function App() {
       );
   }, [activeProject.color, loadProgress, reduceMotion]);
 
-  const transitionDetailBackground = (nextImage) => {
+  const transitionDetailBackground = (nextImage, isPortrait = false) => {
     if (!nextImage || nextImage === detailBg) return;
 
     setIncomingDetailBg(nextImage);
@@ -556,6 +598,7 @@ function App() {
         ease: "power2.inOut",
         onComplete: () => {
           setDetailBg(nextImage);
+          setDetailBgPortrait(isPortrait);
           setIncomingDetailBg(null);
         },
       });
@@ -1022,9 +1065,11 @@ function App() {
     const item = getFullGallery(detailProject)[index];
     if (isGalleryVideo(item)) {
       setFocusedVideo(getGallerySrc(item));
+      setDetailBgPortrait(false);
     } else {
+      const src = getGallerySrc(item);
       setFocusedVideo(null);
-      transitionDetailBackground(getGallerySrc(item));
+      transitionDetailBackground(src, portraitSrcsRef.current.has(src));
     }
     if (imageFocus) return;
 
@@ -1407,16 +1452,28 @@ function App() {
         aria-hidden={!detailProject}
         style={{ pointerEvents: detailProject ? "auto" : "none" }}
       >
-        {detailProject && (
+        {detailProject && (() => {
+          const incomingPortrait = incomingDetailBg ? portraitSrcsRef.current.has(incomingDetailBg) : false;
+          const showBlur = detailBgPortrait || incomingPortrait;
+          const blurSrc = incomingPortrait ? incomingDetailBg : (detailBg || detailProject.detailImage);
+          return (
           <>
+            {showBlur && (
+              <img
+                className="detail-bg detail-bg-blur"
+                src={blurSrc}
+                aria-hidden="true"
+                alt=""
+              />
+            )}
             <img
-              className="detail-bg detail-bg-current"
+              className={`detail-bg detail-bg-current${detailBgPortrait ? " detail-bg--portrait" : ""}`}
               src={detailBg || detailProject.detailImage}
               alt=""
             />
             {incomingDetailBg && (
               <img
-                className="detail-bg detail-bg-next"
+                className={`detail-bg detail-bg-next${incomingPortrait ? " detail-bg--portrait" : ""}`}
                 src={incomingDetailBg}
                 alt=""
               />
@@ -1487,31 +1544,13 @@ function App() {
                 onWheel={handleCarouselWheel}
               >
                 {getFullGallery(detailProject).map((item, index) => (
-                  <button
-                    className={index === activeThumb ? "is-active" : ""}
+                  <CarouselThumb
                     key={getGallerySrc(item)}
-                    onClick={(event) => {
-                      focusGalleryImage(index);
-                      event.currentTarget.scrollIntoView({
-                        behavior: reduceMotion ? "auto" : "smooth",
-                        block: "nearest",
-                        inline: "nearest",
-                      });
-                    }}
-                    type="button"
-                  >
-                    {isGalleryVideo(item) ? (
-                      <video
-                        src={getGallerySrc(item)}
-                        muted
-                        loop
-                        playsInline
-                        autoPlay
-                      />
-                    ) : (
-                      <img src={getGallerySrc(item)} alt={`Apercu ${index + 1} du projet`} />
-                    )}
-                  </button>
+                    item={item}
+                    isActive={index === activeThumb}
+                    onActivate={() => focusGalleryImage(index)}
+                    portraitSrcsRef={portraitSrcsRef}
+                  />
                 ))}
               </div>
               <button
@@ -1524,7 +1563,8 @@ function App() {
               </button>
             </div>
           </>
-        )}
+          );
+        })()}
       </section>
 
       <div
