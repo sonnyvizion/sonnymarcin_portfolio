@@ -984,6 +984,7 @@ button:hover .hover-image__secondary {
   border: 0;
   background: transparent;
   opacity: 0.58;
+  touch-action: manipulation;
   transition:
     opacity 220ms ease,
     transform 220ms ease;
@@ -1242,6 +1243,11 @@ button:hover .hover-image__secondary {
     width: auto;
     padding-right: 34px;
     padding-left: 34px;
+    transition: bottom 0.38s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .detail-view--focus .carousel {
+    bottom: 28px;
   }
 
   .carousel-track {

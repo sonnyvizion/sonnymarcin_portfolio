@@ -1090,10 +1090,15 @@ function App() {
     const track = carouselTrackRef.current;
     if (!track) return;
 
-    track.scrollBy({
-      left: direction * track.clientWidth * 0.72,
-      behavior: reduceMotion ? "auto" : "smooth",
-    });
+    const firstItem = track.querySelector("button");
+    if (firstItem) {
+      const gap = parseFloat(getComputedStyle(track).gap) || 10;
+      const itemW = firstItem.offsetWidth + gap;
+      const visible = Math.max(1, Math.round(track.clientWidth / itemW));
+      track.scrollBy({ left: direction * itemW * visible, behavior: reduceMotion ? "auto" : "smooth" });
+    } else {
+      track.scrollBy({ left: direction * track.clientWidth * 0.72, behavior: reduceMotion ? "auto" : "smooth" });
+    }
   };
 
   const handleCarouselWheel = (event) => {
@@ -1448,7 +1453,7 @@ function App() {
 
       <section
         ref={detailRef}
-        className="detail-view"
+        className={`detail-view${imageFocus ? " detail-view--focus" : ""}`}
         aria-hidden={!detailProject}
         style={{ pointerEvents: detailProject ? "auto" : "none" }}
       >
