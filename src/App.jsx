@@ -511,6 +511,7 @@ function App() {
   const caseStudyRef = useRef(null);
   const caseStudyCtaRef = useRef(null);
   const caseStudyContentRef = useRef(null);
+  const caseStudyBackdropRef = useRef(null);
   const scrambledPortfolio = useScramble(1400);
   const stageRef = useRef(null);
   const slidesRef = useRef([]);
@@ -1119,11 +1120,17 @@ function App() {
       });
       gsap.set(caseStudyContentRef.current, { autoAlpha: 0, y: 14 });
       gsap.set(caseStudyCtaRef.current, { autoAlpha: 0 });
+      gsap.set(caseStudyBackdropRef.current, { display: "block", autoAlpha: 0 });
 
       gsap.timeline({
         defaults: { duration: reduceMotion ? 0.01 : 0.68, ease: "expo.inOut" },
         onComplete: () => setCaseStudyTransitioning(false),
       })
+        .to(caseStudyBackdropRef.current, {
+          autoAlpha: 1,
+          duration: reduceMotion ? 0.01 : 0.48,
+          ease: "power2.out",
+        }, 0)
         .to(caseStudyRef.current, {
           left: targetRect.left,
           top: targetRect.top,
@@ -1145,13 +1152,14 @@ function App() {
     const targetRect = caseStudyCtaRef.current.getBoundingClientRect();
     setCaseStudyTransitioning(true);
 
-    gsap.killTweensOf([caseStudyRef.current, caseStudyContentRef.current]);
+    gsap.killTweensOf([caseStudyRef.current, caseStudyContentRef.current, caseStudyBackdropRef.current]);
     gsap.set(caseStudyCtaRef.current, { autoAlpha: 0 });
 
     gsap.timeline({
       defaults: { duration: reduceMotion ? 0.01 : 0.64, ease: "expo.inOut" },
       onComplete: () => {
         gsap.set(caseStudyRef.current, { display: "none" });
+        gsap.set(caseStudyBackdropRef.current, { display: "none" });
         gsap.set(caseStudyCtaRef.current, { autoAlpha: 1 });
         setCaseStudyOpen(false);
         setCaseStudyTransitioning(false);
@@ -1168,7 +1176,12 @@ function App() {
         top: targetRect.top,
         width: targetRect.width,
         height: targetRect.height,
-      }, 0.06);
+      }, 0.06)
+      .to(caseStudyBackdropRef.current, {
+        autoAlpha: 0,
+        duration: reduceMotion ? 0.01 : 0.38,
+        ease: "power2.in",
+      }, 0.28);
   }, [caseStudyOpen, caseStudyTransitioning, reduceMotion]);
 
   useEffect(() => {
@@ -1715,6 +1728,9 @@ function App() {
                 <span aria-hidden="true" />
               </button>
             </div>
+            {detailProject.caseStudy && (
+              <div ref={caseStudyBackdropRef} className="detail-casestudy-backdrop" onClick={closeCaseStudy} aria-hidden="true" />
+            )}
             {detailProject.caseStudy && (
               <section
                 ref={caseStudyRef}

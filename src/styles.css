@@ -1345,6 +1345,15 @@ button:hover .hover-image__secondary {
 
 /* ── Case Study Panel ────────────────────────────────────────── */
 
+.detail-casestudy-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 49;
+  display: none;
+  background: rgba(0, 0, 0, 0.62);
+  cursor: pointer;
+}
+
 .detail-casestudy {
   position: fixed;
   z-index: 50;
