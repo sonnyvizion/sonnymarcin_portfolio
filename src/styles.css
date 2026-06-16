@@ -1345,37 +1345,37 @@ button:hover .hover-image__secondary {
 /* ── Case Study Panel ────────────────────────────────────────── */
 
 .detail-casestudy {
-  position: absolute;
-  inset: 0;
-  overflow-y: auto;
-  overflow-x: hidden;
-  scrollbar-width: none;
-  z-index: 32;
-  transform: translateY(100%);
-  will-change: transform;
-  background: rgba(10, 10, 13, 0.97);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-}
-
-.detail-casestudy::-webkit-scrollbar {
+  position: fixed;
+  z-index: 50;
   display: none;
+  overflow: hidden;
+  border-radius: 6px;
+  background: var(--cs-color, #111);
+  color: var(--cs-text, #ffffff);
 }
 
 .detail-casestudy__inner {
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 80px 68px 120px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: none;
+  padding: 36px 42px 48px;
+}
+
+.detail-casestudy__inner::-webkit-scrollbar {
+  display: none;
 }
 
 .detail-casestudy__topbar {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin: -80px -68px 80px;
-  padding: 20px 68px;
-  background: var(--cs-color, rgba(255, 255, 255, 0.06));
-  color: var(--cs-text, #ffffff);
+  margin-bottom: 40px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid color-mix(in srgb, var(--cs-text, #fff) 20%, transparent);
 }
 
 .detail-casestudy__label {
@@ -1384,6 +1384,7 @@ button:hover .hover-image__secondary {
   font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
+  color: var(--cs-text, #ffffff);
   opacity: 0.82;
 }
 
@@ -1450,11 +1451,12 @@ button:hover .hover-image__secondary {
 
 .detail-casestudy__body {
   font-family: var(--ui-font);
-  font-size: clamp(16px, 1.4vw, 20px);
+  font-size: clamp(14px, 1.2vw, 17px);
   font-weight: 400;
   line-height: 1.55;
-  color: rgba(255, 255, 255, 0.82);
-  max-width: 680px;
+  color: var(--cs-text, #ffffff);
+  opacity: 0.82;
+  max-width: 100%;
 }
 
 .detail-casestudy__steps {
@@ -1482,6 +1484,8 @@ button:hover .hover-image__secondary {
 }
 
 .detail-casestudy__step p {
+  color: var(--cs-text, #ffffff);
+  opacity: 0.75;
   font-family: var(--ui-font);
   font-size: 14px;
   font-weight: 400;
@@ -1492,16 +1496,16 @@ button:hover .hover-image__secondary {
 
 @media (max-width: 760px) {
   .detail-casestudy__inner {
-    padding: 64px 24px 100px;
+    padding: 28px 24px 48px;
   }
 
   .detail-casestudy__steps {
     grid-template-columns: 1fr;
-    gap: 16px;
+    gap: 12px;
   }
 
   .detail-casestudy__body {
-    font-size: 15px;
+    font-size: 14px;
   }
 }
 

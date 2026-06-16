@@ -506,8 +506,11 @@ function App() {
   const [incomingDetailBg, setIncomingDetailBg] = useState(null);
   const [detailBgPortrait, setDetailBgPortrait] = useState(false);
   const [caseStudyOpen, setCaseStudyOpen] = useState(false);
+  const [caseStudyTransitioning, setCaseStudyTransitioning] = useState(false);
   const portraitSrcsRef = useRef(new Set());
   const caseStudyRef = useRef(null);
+  const caseStudyCtaRef = useRef(null);
+  const caseStudyContentRef = useRef(null);
   const scrambledPortfolio = useScramble(1400);
   const stageRef = useRef(null);
   const slidesRef = useRef([]);
@@ -1087,26 +1090,86 @@ function App() {
   }, [isTransitioning, detailProject, imageFocus, reduceMotion, activeProject]);
 
   const openCaseStudy = useCallback(() => {
-    if (!detailProject?.caseStudy || caseStudyOpen || !caseStudyRef.current) return;
+    if (!detailProject?.caseStudy || caseStudyOpen || caseStudyTransitioning || !caseStudyCtaRef.current || !caseStudyRef.current) return;
+
+    const sourceRect = caseStudyCtaRef.current.getBoundingClientRect();
+    const isMobile = window.matchMedia("(max-width: 760px)").matches;
+    const w = isMobile ? Math.min(window.innerWidth - 40, 420) : Math.min(680, window.innerWidth - 136);
+    const h = isMobile ? Math.min(window.innerHeight - 80, 560) : Math.min(window.innerHeight - 100, 680);
+    const targetRect = {
+      left: (window.innerWidth - w) / 2,
+      top: (window.innerHeight - h) / 2,
+      width: w,
+      height: h,
+    };
+
     setCaseStudyOpen(true);
-    caseStudyRef.current.scrollTop = 0;
-    gsap.set(caseStudyRef.current, { y: 0, yPercent: 100 });
-    gsap.to(caseStudyRef.current, {
-      yPercent: 0,
-      duration: reduceMotion ? 0.01 : 0.72,
-      ease: "expo.out",
+    setCaseStudyTransitioning(true);
+
+    requestAnimationFrame(() => {
+      if (!caseStudyRef.current || !caseStudyContentRef.current) return;
+      caseStudyRef.current.scrollTop = 0;
+      gsap.set(caseStudyRef.current, {
+        display: "flex",
+        left: sourceRect.left,
+        top: sourceRect.top,
+        width: sourceRect.width,
+        height: sourceRect.height,
+        backgroundColor: detailProject.color,
+      });
+      gsap.set(caseStudyContentRef.current, { autoAlpha: 0, y: 14 });
+      gsap.set(caseStudyCtaRef.current, { autoAlpha: 0 });
+
+      gsap.timeline({
+        defaults: { duration: reduceMotion ? 0.01 : 0.68, ease: "expo.inOut" },
+        onComplete: () => setCaseStudyTransitioning(false),
+      })
+        .to(caseStudyRef.current, {
+          left: targetRect.left,
+          top: targetRect.top,
+          width: targetRect.width,
+          height: targetRect.height,
+        }, 0)
+        .to(caseStudyContentRef.current, {
+          autoAlpha: 1,
+          y: 0,
+          duration: reduceMotion ? 0.01 : 0.42,
+          ease: "power3.out",
+        }, 0.68);
     });
-  }, [detailProject, caseStudyOpen, reduceMotion]);
+  }, [detailProject, caseStudyOpen, caseStudyTransitioning, reduceMotion]);
 
   const closeCaseStudy = useCallback(() => {
-    if (!caseStudyOpen || !caseStudyRef.current) return;
-    gsap.to(caseStudyRef.current, {
-      yPercent: 100,
-      duration: reduceMotion ? 0.01 : 0.52,
-      ease: "expo.in",
-      onComplete: () => setCaseStudyOpen(false),
-    });
-  }, [caseStudyOpen, reduceMotion]);
+    if (!caseStudyOpen || caseStudyTransitioning || !caseStudyCtaRef.current || !caseStudyRef.current) return;
+
+    const targetRect = caseStudyCtaRef.current.getBoundingClientRect();
+    setCaseStudyTransitioning(true);
+
+    gsap.killTweensOf([caseStudyRef.current, caseStudyContentRef.current]);
+    gsap.set(caseStudyCtaRef.current, { autoAlpha: 0 });
+
+    gsap.timeline({
+      defaults: { duration: reduceMotion ? 0.01 : 0.64, ease: "expo.inOut" },
+      onComplete: () => {
+        gsap.set(caseStudyRef.current, { display: "none" });
+        gsap.set(caseStudyCtaRef.current, { autoAlpha: 1 });
+        setCaseStudyOpen(false);
+        setCaseStudyTransitioning(false);
+      },
+    })
+      .to(caseStudyContentRef.current, {
+        autoAlpha: 0,
+        y: 10,
+        duration: reduceMotion ? 0.01 : 0.2,
+        ease: "power2.out",
+      }, 0)
+      .to(caseStudyRef.current, {
+        left: targetRect.left,
+        top: targetRect.top,
+        width: targetRect.width,
+        height: targetRect.height,
+      }, 0.06);
+  }, [caseStudyOpen, caseStudyTransitioning, reduceMotion]);
 
   useEffect(() => {
     const onKey = (e) => {
@@ -1129,7 +1192,7 @@ function App() {
 
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [activeIndex, isLoading, detailProject, isTransitioning, contactOpen, caseStudyOpen, goToProject, openProject, closeProject, closeCaseStudy]);
+  }, [activeIndex, isLoading, detailProject, isTransitioning, contactOpen, caseStudyOpen, caseStudyTransitioning, goToProject, openProject, closeProject, closeCaseStudy]);
 
   const focusGalleryImage = (index) => {
     setActiveThumb(index);
@@ -1606,6 +1669,7 @@ function App() {
               <p>{detailProject.description}</p>
               {detailProject.caseStudy && (
                 <button
+                  ref={caseStudyCtaRef}
                   className="detail-casestudy-cta"
                   onClick={openCaseStudy}
                   type="button"
@@ -1654,11 +1718,11 @@ function App() {
             {detailProject.caseStudy && (
               <section
                 ref={caseStudyRef}
-                className={`detail-casestudy${caseStudyOpen ? " is-open" : ""}`}
+                className="detail-casestudy"
                 aria-hidden={!caseStudyOpen}
                 style={{ "--cs-color": detailProject.color, "--cs-text": detailProject.textColor || "#ffffff" }}
               >
-                <div className="detail-casestudy__inner">
+                <div ref={caseStudyContentRef} className="detail-casestudy__inner">
                   <div className="detail-casestudy__topbar">
                     <span className="detail-casestudy__label">Étude de cas — {detailProject.navTitle}</span>
                     <button
