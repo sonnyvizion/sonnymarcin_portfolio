@@ -102,14 +102,18 @@ const projects = [
     title: "Conciergio",
     category: "Shopify website",
     caseStudy: {
-      problem: "Créer une conciergerie Airbnb capable de se gérer entièrement en autonomie : répondre aux voyageurs, gérer check-in et check-out, 24h/24 — sans intervention humaine.",
+      subtitle: "Product Design Case Study",
+      context: "El Conciergio est une solution de conciergerie alimentée par l'intelligence artificielle destinée aux propriétaires Airbnb, gîtes et locations saisonnières. L'objectif du produit est de répondre automatiquement aux demandes récurrentes des voyageurs via WhatsApp afin de réduire la charge opérationnelle des hôtes et d'améliorer l'expérience client. Mon rôle consistait à concevoir une plateforme capable de présenter une technologie complexe de manière simple, rassurante et orientée conversion.",
+      problem: "Les propriétaires de locations saisonnières font face à plusieurs difficultés : répondre aux mêmes questions plusieurs fois par jour, gérer les demandes à toute heure, maintenir un niveau de service élevé malgré un volume important de messages, et expliquer rapidement la valeur d'une solution IA parfois perçue comme complexe. Le véritable défi était de démontrer rapidement le bénéfice métier — pas de présenter la technologie.",
       steps: [
-        { num: "01", title: "Concept & stratégie", text: "Définition du modèle de conciergerie automatisée, naming, positionnement et architecture de l'infrastructure complète." },
-        { num: "02", title: "Design & développement", text: "DA complète et développement du site Shopify custom. Génération IA de l'ensemble des visuels et vidéos du site." },
-        { num: "03", title: "Automatisation n8n", text: "Mise en place de workflows n8n pour orchestrer toutes les interactions voyageur : confirmations, rappels, instructions." },
-        { num: "04", title: "Bot WhatsApp", text: "Paramétrage et entraînement d'un bot WhatsApp pour gérer les voyageurs en temps réel, 24h/24, 7j/7." },
+        { num: "01", title: "Recherche marché", text: "Analyse des conciergeries traditionnelles et des problématiques des propriétaires de locations courte durée. Points de friction identifiés : disponibilité permanente, répétition des tâches, gestion multilingue." },
+        { num: "02", title: "Architecture de l'info", text: "Restructuration du discours autour des bénéfices : gain de temps, amélioration de l'expérience voyageur, disponibilité 24h/24, réduction de la charge mentale — plutôt que la technologie." },
+        { num: "03", title: "UX Design", text: "Parcours conçu pour répondre en quelques secondes à : qu'est-ce que le produit, comment fonctionne-t-il, pourquoi est-il utile, comment l'essayer." },
+        { num: "04", title: "UI & Développement", text: "Interface moderne et rassurante axée lisibilité, hiérarchie et confiance. Maquettes UI, responsive, intégration, optimisation SEO et cohérence visuelle globale." },
       ],
-      result: "Infrastructure complète de A à Z. Zéro intervention manuelle sur la gestion voyageur. Concept, design, code et automatisation menés en solo.",
+      result: "Une solution technologique complexe transformée en expérience claire et orientée utilisateur. La plateforme met désormais l'accent sur les bénéfices concrets : disponibilité 24h/24, automatisation des demandes répétitives, amélioration de l'expérience voyageur, simplification de la gestion quotidienne.",
+      learnings: "Ce projet a renforcé mes compétences en Product Thinking, UX Strategy, Conversion Design et communication produit. Il a confirmé l'importance de concevoir à partir des besoins utilisateurs plutôt qu'à partir de la technologie elle-même.",
+      role: ["Discovery", "Architecture de l'information", "UX Design", "UI Design", "Wireframing", "Prototypage", "Développement", "Intégration web", "Responsive Design", "Optimisation SEO"],
     },
     tags: ["Concept & Design", "IA Génération", "Automatisation n8n", "Bot WhatsApp"],
     yearLabel: "26'",
@@ -442,6 +446,33 @@ function useScramble(duration = 1400) {
 
 const getGallerySrc = (item) => (typeof item === "string" ? item : item.src);
 const isGalleryVideo = (item) => typeof item === "object" && item.type === "video";
+
+function getCsMedia(project) {
+  return getFullGallery(project)
+    .filter(item => {
+      const src = getGallerySrc(item);
+      return !src.includes("picsum");
+    })
+    .slice(0, 4);
+}
+
+function CsMediaItem({ item }) {
+  const src = getGallerySrc(item);
+  if (isGalleryVideo(item)) {
+    return (
+      <video
+        className="detail-casestudy__img"
+        src={src}
+        poster={src.replace(/\.mp4$/i, "-poster.jpg")}
+        autoPlay
+        muted
+        loop
+        playsInline
+      />
+    );
+  }
+  return <img src={src} alt="" className="detail-casestudy__img" />;
+}
 
 function CarouselThumb({ item, isActive, onActivate, portraitSrcsRef }) {
   const [isPortrait, setIsPortrait] = useState(false);
@@ -1739,7 +1770,7 @@ function App() {
               >
                 <div ref={caseStudyContentRef} className="detail-casestudy__inner">
                   <div className="detail-casestudy__topbar">
-                    <span className="detail-casestudy__label">Étude de cas — {detailProject.navTitle}</span>
+                    <span className="detail-casestudy__label">Étude de cas</span>
                     <button
                       className="detail-casestudy__close"
                       onClick={closeCaseStudy}
@@ -1750,36 +1781,78 @@ function App() {
                     </button>
                   </div>
 
-                  <div className="detail-casestudy__section">
-                    <div className="detail-casestudy__section-head">
-                      <span className="detail-casestudy__num">01</span>
-                      <span className="detail-casestudy__section-title">Problème</span>
-                    </div>
-                    <p className="detail-casestudy__body">{detailProject.caseStudy.problem}</p>
-                  </div>
+                  {(() => {
+                    const media = getCsMedia(detailProject);
+                    const cs = detailProject.caseStudy;
+                    return (
+                      <>
+                        <h2 className="detail-casestudy__project-title">{detailProject.navTitle}</h2>
+                        {cs.subtitle && <p className="detail-casestudy__subtitle">{cs.subtitle}</p>}
 
-                  <div className="detail-casestudy__section">
-                    <div className="detail-casestudy__section-head">
-                      <span className="detail-casestudy__num">02</span>
-                      <span className="detail-casestudy__section-title">Processus</span>
-                    </div>
-                    <div className="detail-casestudy__steps">
-                      {detailProject.caseStudy.steps.map((step) => (
-                        <div key={step.num} className="detail-casestudy__step">
-                          <strong>{step.num} — {step.title}</strong>
-                          <p>{step.text}</p>
+                        {cs.context && (
+                          <div className="detail-casestudy__block">
+                            <p className="detail-casestudy__block-label">Contexte</p>
+                            <p className="detail-casestudy__body">{cs.context}</p>
+                          </div>
+                        )}
+
+                        <div className="detail-casestudy__block">
+                          <p className="detail-casestudy__block-label">Le problème</p>
+                          <p className="detail-casestudy__body">{cs.problem}</p>
                         </div>
-                      ))}
-                    </div>
-                  </div>
 
-                  <div className="detail-casestudy__section">
-                    <div className="detail-casestudy__section-head">
-                      <span className="detail-casestudy__num">03</span>
-                      <span className="detail-casestudy__section-title">Résultat</span>
-                    </div>
-                    <p className="detail-casestudy__body">{detailProject.caseStudy.result}</p>
-                  </div>
+                        {media[0] && (
+                          <div className="detail-casestudy__img-wrap">
+                            <CsMediaItem item={media[0]} />
+                            {media[1] && <CsMediaItem item={media[1]} />}
+                          </div>
+                        )}
+
+                        <div className="detail-casestudy__block">
+                          <p className="detail-casestudy__block-label">Ma démarche</p>
+                          <h3 className="detail-casestudy__block-title">Comment on l'a construit</h3>
+                          <div className="detail-casestudy__steps">
+                            {cs.steps.map((step) => (
+                              <div key={step.num} className="detail-casestudy__step">
+                                <span className="detail-casestudy__step-num">{step.num}</span>
+                                <strong>{step.title}</strong>
+                                <p>{step.text}</p>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+
+                        {media[2] && (
+                          <div className="detail-casestudy__img-wrap detail-casestudy__img-wrap--single">
+                            <CsMediaItem item={media[2]} />
+                          </div>
+                        )}
+
+                        <div className="detail-casestudy__block">
+                          <p className="detail-casestudy__block-label">Résultat</p>
+                          <p className="detail-casestudy__body">{cs.result}</p>
+                        </div>
+
+                        {cs.learnings && (
+                          <div className="detail-casestudy__block">
+                            <p className="detail-casestudy__block-label">Ce que j'ai appris</p>
+                            <p className="detail-casestudy__body">{cs.learnings}</p>
+                          </div>
+                        )}
+
+                        {cs.role && (
+                          <div className="detail-casestudy__block">
+                            <p className="detail-casestudy__block-label">Mon rôle — Product Designer</p>
+                            <div className="detail-casestudy__role-tags">
+                              {cs.role.map((r) => (
+                                <span key={r} className="detail-casestudy__role-tag">{r}</span>
+                              ))}
+                            </div>
+                          </div>
+                        )}
+                      </>
+                    );
+                  })()}
                 </div>
               </section>
             )}
