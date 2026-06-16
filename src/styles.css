@@ -1001,6 +1001,30 @@ button:hover .hover-image__secondary {
   z-index: 1;
 }
 
+.carousel-thumb-play {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.22);
+  transition: background 220ms ease;
+}
+.carousel-thumb-play::after {
+  content: "";
+  display: block;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 5px 0 5px 9px;
+  border-color: transparent transparent transparent rgba(255, 255, 255, 0.9);
+  margin-left: 2px;
+}
+.carousel-track button.is-video:hover .carousel-thumb-play,
+.carousel-track button.is-video.is-active .carousel-thumb-play {
+  background: rgba(0, 0, 0, 0.1);
+}
+
 .carousel-control {
   position: absolute;
   top: 50%;
