@@ -457,7 +457,6 @@ function CarouselThumb({ item, isActive, onActivate, portraitSrcsRef }) {
     return (
       <button className={`${isActive ? "is-active" : ""} is-video`} onClick={handleClick} type="button" aria-label="Voir la vidéo">
         <img src={poster} alt="" />
-        <span className="carousel-thumb-play" aria-hidden="true" />
       </button>
     );
   }
