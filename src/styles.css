@@ -1327,6 +1327,8 @@ button:hover .hover-image__secondary {
   height: 30px;
   margin-top: 22px;
   padding: 0 18px;
+  border-radius: 0;
+  -webkit-appearance: none;
   font-family: var(--ui-font);
   font-size: 14px;
   font-weight: 500;
@@ -1348,6 +1350,7 @@ button:hover .hover-image__secondary {
   z-index: 50;
   display: none;
   overflow: hidden;
+  border-radius: 0;
   background: var(--cs-color, #111);
   color: var(--cs-text, #ffffff);
 }
