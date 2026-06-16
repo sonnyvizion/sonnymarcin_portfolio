@@ -413,9 +413,10 @@ function CarouselThumb({ item, isActive, onActivate, portraitSrcsRef }) {
   };
 
   if (isGalleryVideo(item)) {
+    const poster = src.replace(/\.mp4$/i, "-poster.jpg");
     return (
       <button className={isActive ? "is-active" : ""} onClick={handleClick} type="button">
-        <video src={src} muted loop playsInline autoPlay />
+        <video src={src} poster={poster} muted loop playsInline autoPlay preload="metadata" />
       </button>
     );
   }
