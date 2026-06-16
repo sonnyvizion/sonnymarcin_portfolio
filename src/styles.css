@@ -1291,6 +1291,198 @@ button:hover .hover-image__secondary {
   }
 }
 
+/* ── Case Study CTA ─────────────────────────────────────────── */
+
+.detail-casestudy-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 28px;
+  color: rgba(255, 255, 255, 0.72);
+  font-family: var(--ui-font);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  transition: color 220ms ease, transform 220ms ease;
+}
+
+.detail-casestudy-cta:hover {
+  color: #ffffff;
+  transform: translateX(3px);
+}
+
+.detail-casestudy-cta__arrow {
+  display: block;
+  width: 22px;
+  height: 1px;
+  background: currentColor;
+  transition: width 220ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.detail-casestudy-cta:hover .detail-casestudy-cta__arrow {
+  width: 32px;
+}
+
+/* ── Case Study Panel ────────────────────────────────────────── */
+
+.detail-casestudy {
+  position: absolute;
+  inset: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: none;
+  z-index: 32;
+  transform: translateY(100%);
+  will-change: transform;
+  background: rgba(10, 10, 13, 0.97);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.detail-casestudy::-webkit-scrollbar {
+  display: none;
+}
+
+.detail-casestudy__inner {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 80px 68px 120px;
+}
+
+.detail-casestudy__topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 80px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.detail-casestudy__label {
+  font-family: var(--ui-font);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.detail-casestudy__close {
+  position: relative;
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  opacity: 0.5;
+  transition: opacity 200ms ease;
+}
+
+.detail-casestudy__close:hover {
+  opacity: 1;
+}
+
+.detail-casestudy__close span {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: block;
+  width: 18px;
+  height: 1px;
+  background: #ffffff;
+}
+
+.detail-casestudy__close span:first-child {
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.detail-casestudy__close span:last-child {
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+.detail-casestudy__section {
+  margin-bottom: 72px;
+}
+
+.detail-casestudy__section-head {
+  display: flex;
+  align-items: baseline;
+  gap: 18px;
+  margin-bottom: 32px;
+}
+
+.detail-casestudy__num {
+  font-family: var(--display-font);
+  font-size: clamp(56px, 5vw, 80px);
+  font-weight: 800;
+  line-height: 1;
+  color: rgba(255, 255, 255, 0.08);
+}
+
+.detail-casestudy__section-title {
+  font-family: var(--ui-font);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.36);
+}
+
+.detail-casestudy__body {
+  font-family: var(--ui-font);
+  font-size: clamp(16px, 1.4vw, 20px);
+  font-weight: 400;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.82);
+  max-width: 680px;
+}
+
+.detail-casestudy__steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 28px;
+}
+
+.detail-casestudy__step {
+  padding: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 4px;
+}
+
+.detail-casestudy__step strong {
+  display: block;
+  margin-bottom: 12px;
+  font-family: var(--ui-font);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.detail-casestudy__step p {
+  font-family: var(--ui-font);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.7);
+  margin: 0;
+}
+
+@media (max-width: 760px) {
+  .detail-casestudy__inner {
+    padding: 64px 24px 100px;
+  }
+
+  .detail-casestudy__steps {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .detail-casestudy__body {
+    font-size: 15px;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

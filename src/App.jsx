@@ -7,7 +7,15 @@ const projects = [
     navTitle: "Le Domaine d'Arimont",
     title: "Arimont",
     category: "Site vitrine",
-    caseStudy: true,
+    caseStudy: {
+      problem: "Un domaine ardennais sans présence digitale, avec uniquement des photos de téléphone comme matière visuelle. L'enjeu : créer une expérience en ligne premium en partant de rien.",
+      steps: [
+        { num: "01", title: "Audit & stratégie", text: "Analyse des assets existants, définition du positionnement, de l'architecture de contenu et de la DA." },
+        { num: "02", title: "Réhabilitation IA", text: "Upscaling et retouche IA des photos basse résolution. Génération de séquences vidéo immersives à partir des visuels réhabilités." },
+        { num: "03", title: "Design & développement", text: "Conception complète et développement sur Sanity CMS. Back-office sur-mesure pour une gestion autonome par le client." },
+      ],
+      result: "Site vitrine livré, visuels transformés de photos téléphone en assets premium. Le client gère son contenu en autonomie totale.",
+    },
     url: "https://sonnyvizion.github.io/lasourcedarimont/index.html",
     tags: ["Direction artistique", "Développement", "Sanity CMS", "Retouche IA", "Vidéo IA"],
     yearLabel: "26'",
@@ -28,7 +36,15 @@ const projects = [
     navTitle: "Holora",
     title: "Holora",
     category: "Shopify Custom",
-    caseStudy: true,
+    caseStudy: {
+      problem: "Lancer une boutique TCG Pokémon et One Piece dans un marché saturé de templates génériques. Créer une identité forte et un store qui se démarque visuellement.",
+      steps: [
+        { num: "01", title: "Univers & DA", text: "Définition de l'identité visuelle complète : palette, typographie, tone of voice et direction artistique globale." },
+        { num: "02", title: "Shopify custom", text: "Développement d'un thème Shopify entièrement sur-mesure, zero template. Chaque section conçue pour la mise en valeur produit." },
+        { num: "03", title: "Visuels IA", text: "Génération de l'ensemble des visuels et vidéos du store par IA. Identité cohérente sans shooting physique." },
+      ],
+      result: "Store opérationnel avec une identité distincte dans le secteur TCG. DA et dev réalisés en solo, de la maquette au go-live.",
+    },
     url: "https://holora.net/",
     tags: ["Direction artistique", "Shopify Custom", "Vidéo & Visuels IA"],
     yearLabel: "26'",
@@ -53,7 +69,15 @@ const projects = [
     navTitle: "Young, Wild & Pixels",
     title: "Young, Wild & Pixels",
     category: "Site vitrine",
-    caseStudy: true,
+    caseStudy: {
+      problem: "Concevoir ma propre agence en ligne : un site qui reflète exactement mon positionnement, sans dépendre d'un dev pour les mises à jour, avec un back-office autonome.",
+      steps: [
+        { num: "01", title: "Direction artistique", text: "Conception de l'identité et de la DA du site en partant de zéro. Le site est lui-même une démonstration du savoir-faire." },
+        { num: "02", title: "Développement front", text: "Développement complet, intégration et optimisation des performances. Codé pour être rapide et maintenable." },
+        { num: "03", title: "Sanity CMS", text: "Mise en place du back-office Sanity pour une gestion de contenu autonome. Ajout de projets sans toucher au code." },
+      ],
+      result: "Site vitrine auto-gérable livré. Vitrine directe de mes compétences techniques et créatives — chaque section est une proof of concept.",
+    },
     url: "https://youngwildandpixels.com/fr/index.html",
     tags: ["Direction artistique", "Développement", "Sanity CMS"],
     yearLabel: "26'",
@@ -77,7 +101,16 @@ const projects = [
     navTitle: "El Conciergio",
     title: "Conciergio",
     category: "Shopify website",
-    caseStudy: true,
+    caseStudy: {
+      problem: "Créer une conciergerie Airbnb capable de se gérer entièrement en autonomie : répondre aux voyageurs, gérer check-in et check-out, 24h/24 — sans intervention humaine.",
+      steps: [
+        { num: "01", title: "Concept & stratégie", text: "Définition du modèle de conciergerie automatisée, naming, positionnement et architecture de l'infrastructure complète." },
+        { num: "02", title: "Design & développement", text: "DA complète et développement du site Shopify custom. Génération IA de l'ensemble des visuels et vidéos du site." },
+        { num: "03", title: "Automatisation n8n", text: "Mise en place de workflows n8n pour orchestrer toutes les interactions voyageur : confirmations, rappels, instructions." },
+        { num: "04", title: "Bot WhatsApp", text: "Paramétrage et entraînement d'un bot WhatsApp pour gérer les voyageurs en temps réel, 24h/24, 7j/7." },
+      ],
+      result: "Infrastructure complète de A à Z. Zéro intervention manuelle sur la gestion voyageur. Concept, design, code et automatisation menés en solo.",
+    },
     tags: ["Concept & Design", "IA Génération", "Automatisation n8n", "Bot WhatsApp"],
     yearLabel: "26'",
     color: "#20C934",
@@ -471,7 +504,9 @@ function App() {
   const [detailBg, setDetailBg] = useState(null);
   const [incomingDetailBg, setIncomingDetailBg] = useState(null);
   const [detailBgPortrait, setDetailBgPortrait] = useState(false);
+  const [caseStudyOpen, setCaseStudyOpen] = useState(false);
   const portraitSrcsRef = useRef(new Set());
+  const caseStudyRef = useRef(null);
   const scrambledPortfolio = useScramble(1400);
   const stageRef = useRef(null);
   const slidesRef = useRef([]);
@@ -854,6 +889,7 @@ function App() {
     setDetailProject(activeProject);
     setActiveThumb(0);
     setImageFocus(false);
+    setCaseStudyOpen(false);
     setDetailBg(activeProject.detailImage);
     setIncomingDetailBg(null);
 
@@ -998,6 +1034,7 @@ function App() {
         },
         onComplete: () => {
           setDetailProject(null);
+          setCaseStudyOpen(false);
           gsap.set(transitionCard, { display: "none" });
           gsap.set(cardRef.current, { autoAlpha: 1 });
           gsap.to(".project-card--home .project-card__hint", {
@@ -1048,11 +1085,35 @@ function App() {
       });
   }, [isTransitioning, detailProject, imageFocus, reduceMotion, activeProject]);
 
+  const openCaseStudy = useCallback(() => {
+    if (!detailProject?.caseStudy || caseStudyOpen || !caseStudyRef.current) return;
+    setCaseStudyOpen(true);
+    caseStudyRef.current.scrollTop = 0;
+    gsap.fromTo(
+      caseStudyRef.current,
+      { yPercent: 100 },
+      { yPercent: 0, duration: reduceMotion ? 0.01 : 0.72, ease: "expo.out" }
+    );
+  }, [detailProject, caseStudyOpen, reduceMotion]);
+
+  const closeCaseStudy = useCallback(() => {
+    if (!caseStudyOpen || !caseStudyRef.current) return;
+    gsap.to(caseStudyRef.current, {
+      yPercent: 100,
+      duration: reduceMotion ? 0.01 : 0.52,
+      ease: "expo.in",
+      onComplete: () => setCaseStudyOpen(false),
+    });
+  }, [caseStudyOpen, reduceMotion]);
+
   useEffect(() => {
     const onKey = (e) => {
       if (isLoading || isTransitioning || contactOpen) return;
       if (detailProject) {
-        if (e.key === "Escape") closeProject();
+        if (e.key === "Escape") {
+          if (caseStudyOpen) closeCaseStudy();
+          else closeProject();
+        }
         return;
       }
       if (e.key === "ArrowDown" || e.key === "ArrowRight") {
@@ -1066,7 +1127,7 @@ function App() {
 
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [activeIndex, isLoading, detailProject, isTransitioning, contactOpen, goToProject, openProject, closeProject]);
+  }, [activeIndex, isLoading, detailProject, isTransitioning, contactOpen, caseStudyOpen, goToProject, openProject, closeProject, closeCaseStudy]);
 
   const focusGalleryImage = (index) => {
     setActiveThumb(index);
@@ -1541,6 +1602,12 @@ function App() {
             <div ref={contentRef} className="detail-copy detail-focus-hide">
               <h1>{detailProject.navTitle}</h1>
               <p>{detailProject.description}</p>
+              {detailProject.caseStudy && (
+                <button className="detail-casestudy-cta" onClick={openCaseStudy} type="button">
+                  <span>Étude de cas</span>
+                  <span className="detail-casestudy-cta__arrow" aria-hidden="true" />
+                </button>
+              )}
             </div>
             <div ref={carouselRef} className="carousel" aria-label="Images projet">
               <button
@@ -1575,6 +1642,58 @@ function App() {
                 <span aria-hidden="true" />
               </button>
             </div>
+            {detailProject.caseStudy && (
+              <section
+                ref={caseStudyRef}
+                className={`detail-casestudy${caseStudyOpen ? " is-open" : ""}`}
+                aria-hidden={!caseStudyOpen}
+              >
+                <div className="detail-casestudy__inner">
+                  <div className="detail-casestudy__topbar">
+                    <span className="detail-casestudy__label">Étude de cas — {detailProject.navTitle}</span>
+                    <button
+                      className="detail-casestudy__close"
+                      onClick={closeCaseStudy}
+                      type="button"
+                      aria-label="Fermer l'étude de cas"
+                    >
+                      <span /><span />
+                    </button>
+                  </div>
+
+                  <div className="detail-casestudy__section">
+                    <div className="detail-casestudy__section-head">
+                      <span className="detail-casestudy__num">01</span>
+                      <span className="detail-casestudy__section-title">Problème</span>
+                    </div>
+                    <p className="detail-casestudy__body">{detailProject.caseStudy.problem}</p>
+                  </div>
+
+                  <div className="detail-casestudy__section">
+                    <div className="detail-casestudy__section-head">
+                      <span className="detail-casestudy__num">02</span>
+                      <span className="detail-casestudy__section-title">Processus</span>
+                    </div>
+                    <div className="detail-casestudy__steps">
+                      {detailProject.caseStudy.steps.map((step) => (
+                        <div key={step.num} className="detail-casestudy__step">
+                          <strong>{step.num} — {step.title}</strong>
+                          <p>{step.text}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="detail-casestudy__section">
+                    <div className="detail-casestudy__section-head">
+                      <span className="detail-casestudy__num">03</span>
+                      <span className="detail-casestudy__section-title">Résultat</span>
+                    </div>
+                    <p className="detail-casestudy__body">{detailProject.caseStudy.result}</p>
+                  </div>
+                </div>
+              </section>
+            )}
           </>
           );
         })()}
