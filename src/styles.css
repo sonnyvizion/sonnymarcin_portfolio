@@ -1572,6 +1572,7 @@ button:hover .hover-image__secondary {
   object-fit: cover;
   display: block;
   flex-shrink: 0;
+  opacity: 0.9;
 }
 
 /* Steps */
