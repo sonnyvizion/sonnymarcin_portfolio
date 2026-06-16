@@ -7,6 +7,7 @@ const projects = [
     navTitle: "Le Domaine d'Arimont",
     title: "Arimont",
     category: "Site vitrine",
+    caseStudy: true,
     url: "https://sonnyvizion.github.io/lasourcedarimont/index.html",
     tags: ["Direction artistique", "Développement", "Sanity CMS", "Retouche IA", "Vidéo IA"],
     yearLabel: "26'",
@@ -27,6 +28,7 @@ const projects = [
     navTitle: "Holora",
     title: "Holora",
     category: "Shopify Custom",
+    caseStudy: true,
     url: "https://holora.net/",
     tags: ["Direction artistique", "Shopify Custom", "Vidéo & Visuels IA"],
     yearLabel: "26'",
@@ -51,6 +53,7 @@ const projects = [
     navTitle: "Young, Wild & Pixels",
     title: "Young, Wild & Pixels",
     category: "Site vitrine",
+    caseStudy: true,
     url: "https://youngwildandpixels.com/fr/index.html",
     tags: ["Direction artistique", "Développement", "Sanity CMS"],
     yearLabel: "26'",
@@ -74,6 +77,7 @@ const projects = [
     navTitle: "El Conciergio",
     title: "Conciergio",
     category: "Shopify website",
+    caseStudy: true,
     tags: ["Concept & Design", "IA Génération", "Automatisation n8n", "Bot WhatsApp"],
     yearLabel: "26'",
     color: "#20C934",
@@ -342,6 +346,9 @@ function ProjectCard({
       <span className="project-card__content">
         <span className="project-card__category card-motion-label">
           {project.category}
+          {project.caseStudy && (
+            <span className="project-card__case-study-badge">Étude de cas</span>
+          )}
         </span>
         <span className="project-card__title card-motion-title">
           {project.title}
