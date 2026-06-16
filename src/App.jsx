@@ -1089,11 +1089,12 @@ function App() {
     if (!detailProject?.caseStudy || caseStudyOpen || !caseStudyRef.current) return;
     setCaseStudyOpen(true);
     caseStudyRef.current.scrollTop = 0;
-    gsap.fromTo(
-      caseStudyRef.current,
-      { yPercent: 100 },
-      { yPercent: 0, duration: reduceMotion ? 0.01 : 0.72, ease: "expo.out" }
-    );
+    gsap.set(caseStudyRef.current, { y: 0, yPercent: 100 });
+    gsap.to(caseStudyRef.current, {
+      yPercent: 0,
+      duration: reduceMotion ? 0.01 : 0.72,
+      ease: "expo.out",
+    });
   }, [detailProject, caseStudyOpen, reduceMotion]);
 
   const closeCaseStudy = useCallback(() => {
