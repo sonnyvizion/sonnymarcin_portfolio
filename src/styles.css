@@ -1403,6 +1403,7 @@ button:hover .hover-image__secondary {
   width: 32px;
   height: 32px;
   flex-shrink: 0;
+  background: transparent;
   opacity: 0.5;
   transition: opacity 200ms ease;
 }
