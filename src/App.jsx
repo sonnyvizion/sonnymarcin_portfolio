@@ -1605,9 +1605,16 @@ function App() {
               <h1>{detailProject.navTitle}</h1>
               <p>{detailProject.description}</p>
               {detailProject.caseStudy && (
-                <button className="detail-casestudy-cta" onClick={openCaseStudy} type="button">
-                  <span>Étude de cas</span>
-                  <span className="detail-casestudy-cta__arrow" aria-hidden="true" />
+                <button
+                  className="detail-casestudy-cta"
+                  onClick={openCaseStudy}
+                  type="button"
+                  style={{
+                    backgroundColor: detailProject.color,
+                    color: detailProject.textColor || "#ffffff",
+                  }}
+                >
+                  Étude de cas
                 </button>
               )}
             </div>
@@ -1649,6 +1656,7 @@ function App() {
                 ref={caseStudyRef}
                 className={`detail-casestudy${caseStudyOpen ? " is-open" : ""}`}
                 aria-hidden={!caseStudyOpen}
+                style={{ "--cs-color": detailProject.color, "--cs-text": detailProject.textColor || "#ffffff" }}
               >
                 <div className="detail-casestudy__inner">
                   <div className="detail-casestudy__topbar">

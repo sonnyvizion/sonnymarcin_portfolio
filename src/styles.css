@@ -1322,32 +1322,24 @@ button:hover .hover-image__secondary {
 .detail-casestudy-cta {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
-  margin-top: 28px;
-  color: rgba(255, 255, 255, 0.72);
+  justify-content: center;
+  min-width: 98px;
+  height: 30px;
+  margin-top: 22px;
+  padding: 0 18px;
+  border-radius: 4px;
   font-family: var(--ui-font);
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.12em;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1;
   text-transform: uppercase;
-  transition: color 220ms ease, transform 220ms ease;
+  letter-spacing: 0.04em;
+  transition: opacity 180ms ease, transform 180ms ease;
 }
 
 .detail-casestudy-cta:hover {
-  color: #ffffff;
-  transform: translateX(3px);
-}
-
-.detail-casestudy-cta__arrow {
-  display: block;
-  width: 22px;
-  height: 1px;
-  background: currentColor;
-  transition: width 220ms cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.detail-casestudy-cta:hover .detail-casestudy-cta__arrow {
-  width: 32px;
+  opacity: 0.86;
+  transform: translateY(-1px);
 }
 
 /* ── Case Study Panel ────────────────────────────────────────── */
@@ -1380,9 +1372,10 @@ button:hover .hover-image__secondary {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 80px;
-  padding-bottom: 24px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  margin: -80px -68px 80px;
+  padding: 20px 68px;
+  background: var(--cs-color, rgba(255, 255, 255, 0.06));
+  color: var(--cs-text, #ffffff);
 }
 
 .detail-casestudy__label {
@@ -1391,7 +1384,7 @@ button:hover .hover-image__secondary {
   font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.4);
+  opacity: 0.82;
 }
 
 .detail-casestudy__close {
@@ -1414,7 +1407,7 @@ button:hover .hover-image__secondary {
   display: block;
   width: 18px;
   height: 1px;
-  background: #ffffff;
+  background: var(--cs-text, #ffffff);
 }
 
 .detail-casestudy__close span:first-child {
@@ -1441,7 +1434,8 @@ button:hover .hover-image__secondary {
   font-size: clamp(56px, 5vw, 80px);
   font-weight: 800;
   line-height: 1;
-  color: rgba(255, 255, 255, 0.08);
+  color: var(--cs-color, rgba(255, 255, 255, 0.08));
+  opacity: 0.28;
 }
 
 .detail-casestudy__section-title {
@@ -1450,7 +1444,8 @@ button:hover .hover-image__secondary {
   font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.36);
+  color: var(--cs-color, rgba(255, 255, 255, 0.36));
+  opacity: 0.72;
 }
 
 .detail-casestudy__body {
@@ -1470,7 +1465,7 @@ button:hover .hover-image__secondary {
 
 .detail-casestudy__step {
   padding: 24px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid color-mix(in srgb, var(--cs-color, #fff) 20%, transparent);
   border-radius: 4px;
 }
 
@@ -1482,7 +1477,8 @@ button:hover .hover-image__secondary {
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.5);
+  color: var(--cs-color, rgba(255, 255, 255, 0.5));
+  opacity: 0.8;
 }
 
 .detail-casestudy__step p {
