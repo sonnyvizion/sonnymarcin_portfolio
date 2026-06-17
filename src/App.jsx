@@ -380,6 +380,7 @@ function ProjectCard({
       aria-hidden={hidden}
       tabIndex={hidden ? -1 : 0}
     >
+      <span className="project-card__wipe" aria-hidden="true" />
       <span className="project-card__content">
         <span className="project-card__category card-motion-label">
           {project.category}
@@ -718,13 +719,22 @@ function App() {
       scrollStateRef.current.lock = true;
       gsap.killTweensOf(stageRef.current);
       gsap.set(stageRef.current, { y: 0 });
+      const wipeEl = cardRef.current?.querySelector(".project-card__wipe");
       gsap.killTweensOf([
         currentSlide,
         nextSlide,
         currentImage,
         nextImage,
         cardRef.current,
+        wipeEl,
       ]);
+      if (wipeEl) {
+        gsap.set(wipeEl, {
+          backgroundColor: projects[nextIndex].color,
+          scaleY: 0,
+          transformOrigin: "center bottom",
+        });
+      }
       gsap.set(nextSlide, { yPercent: 100 * direction, autoAlpha: 1, zIndex: 4 });
       gsap.set(currentSlide, { yPercent: 0, autoAlpha: 1, zIndex: 2, scale: 1 });
       gsap.set(currentImage, { yPercent: 0, scale: 1, filter: "brightness(1)" });
@@ -798,18 +808,19 @@ function App() {
           0,
         )
         .to(
-          cardRef.current,
+          wipeEl,
           {
-            backgroundColor: projects[nextIndex].color,
-            duration: reduceMotion ? 0.01 : 0.58,
+            scaleY: 1,
+            duration: reduceMotion ? 0.01 : 0.44,
             ease: "power3.inOut",
           },
-          0.14,
+          0.1,
         )
         .call(
           () => {
             setActiveIndex(nextIndex);
             requestAnimationFrame(() => {
+              if (wipeEl) gsap.set(wipeEl, { scaleY: 0 });
               gsap.set(".project-card--home .project-card__content", {
                 y: 0,
                 autoAlpha: 1,
@@ -822,7 +833,7 @@ function App() {
             });
           },
           null,
-          0.34,
+          0.56,
         );
     },
     [
