@@ -477,6 +477,7 @@ function CsMediaItem({ item }) {
 
 function CarouselThumb({ item, isActive, onActivate, portraitSrcsRef }) {
   const [isPortrait, setIsPortrait] = useState(false);
+  const [posterFailed, setPosterFailed] = useState(false);
   const src = getGallerySrc(item);
   const thumbVideoRef = useRef(null);
 
@@ -486,18 +487,23 @@ function CarouselThumb({ item, isActive, onActivate, portraitSrcsRef }) {
   };
 
   if (isGalleryVideo(item)) {
+    const poster = src.replace(/\.mp4$/i, "-poster.jpg");
     return (
       <button className={`${isActive ? "is-active" : ""} is-video`} onClick={handleClick} type="button" aria-label="Voir la vidéo">
-        <video
-          ref={thumbVideoRef}
-          src={src}
-          preload="metadata"
-          muted
-          playsInline
-          onLoadedMetadata={() => {
-            if (thumbVideoRef.current) thumbVideoRef.current.currentTime = 1;
-          }}
-        />
+        {posterFailed ? (
+          <video
+            ref={thumbVideoRef}
+            src={src}
+            preload="metadata"
+            muted
+            playsInline
+            onLoadedMetadata={() => {
+              if (thumbVideoRef.current) thumbVideoRef.current.currentTime = 1;
+            }}
+          />
+        ) : (
+          <img src={poster} alt="" onError={() => setPosterFailed(true)} />
+        )}
       </button>
     );
   }
