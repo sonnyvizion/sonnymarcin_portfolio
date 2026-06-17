@@ -1489,13 +1489,16 @@ function App() {
             className="project-slide"
             key={project.slug}
           >
-            {project.heroVideo ? (
+            {project.heroImage && (
+              <img className="slide-media slide-media--fallback" src={project.heroImage} alt="" />
+            )}
+            {project.heroVideo && (
               <video
                 ref={(el) => {
                   videoRefs.current[index] = el;
                   if (el && el.readyState >= 3) videosReadyRef.current = true;
                 }}
-                className="slide-media"
+                className="slide-media slide-media--video"
                 src={project.heroVideo}
                 muted
                 loop
@@ -1503,8 +1506,6 @@ function App() {
                 preload="auto"
                 onCanPlayThrough={() => { videosReadyRef.current = true; }}
               />
-            ) : (
-              <img className="slide-media" src={project.heroImage} alt="" />
             )}
             <span className="scrim" />
           </article>
