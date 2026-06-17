@@ -718,8 +718,8 @@ function App() {
         requestedDirection ?? (requestedIndex > activeIndex ? 1 : -1);
       const currentSlide = slidesRef.current[activeIndex];
       const nextSlide = slidesRef.current[nextIndex];
-      const currentImage = currentSlide.querySelector(".slide-media");
-      const nextImage = nextSlide.querySelector(".slide-media");
+      const currentImage = currentSlide.querySelector(".slide-media--video") || currentSlide.querySelector(".slide-media");
+      const nextImage = nextSlide.querySelector(".slide-media--video") || nextSlide.querySelector(".slide-media");
       if (!currentSlide || !nextSlide) return;
 
       scrollStateRef.current.lock = true;

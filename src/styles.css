@@ -209,13 +209,11 @@ button:hover .hover-image__secondary {
 .slide-media--fallback {
   position: absolute;
   inset: 0;
-  z-index: 0;
 }
 
 .slide-media--video {
   position: absolute;
   inset: 0;
-  z-index: 1;
 }
 
 .detail-video-focus {
