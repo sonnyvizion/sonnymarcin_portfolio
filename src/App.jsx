@@ -502,7 +502,7 @@ function CarouselThumb({ item, isActive, onActivate, portraitSrcsRef }) {
             }}
           />
         ) : (
-          <img src={poster} alt="" onError={() => setPosterFailed(true)} />
+          <img src={poster} alt="" fetchPriority="high" onError={() => setPosterFailed(true)} />
         )}
       </button>
     );
@@ -518,6 +518,7 @@ function CarouselThumb({ item, isActive, onActivate, portraitSrcsRef }) {
       <img
         src={src}
         alt=""
+        fetchPriority="high"
         onLoad={(e) => {
           if (e.target.naturalHeight > e.target.naturalWidth) {
             setIsPortrait(true);
@@ -1498,35 +1499,40 @@ function App() {
   return (
     <main className="app">
       <section ref={stageRef} className="home-stage" aria-label="Projets">
-        {projects.map((project, index) => (
-          <article
-            ref={(node) => {
-              slidesRef.current[index] = node;
-            }}
-            className="project-slide"
-            key={project.slug}
-          >
-            {project.heroImage && (
-              <img className="slide-media slide-media--fallback" src={project.heroImage} alt="" />
-            )}
-            {project.heroVideo && (
-              <video
-                ref={(el) => {
-                  videoRefs.current[index] = el;
-                  if (el && el.readyState >= 3) videosReadyRef.current = true;
-                }}
-                className="slide-media slide-media--video"
-                src={project.heroVideo}
-                muted
-                loop
-                playsInline
-                preload="auto"
-                onCanPlayThrough={() => { videosReadyRef.current = true; }}
-              />
-            )}
-            <span className="scrim" />
-          </article>
-        ))}
+        {projects.map((project, index) => {
+          const distance = Math.abs(getWheelOffset(index, activeIndex, projects.length));
+          const shouldLoadVideo = distance <= 1 && !detailProject;
+
+          return (
+            <article
+              ref={(node) => {
+                slidesRef.current[index] = node;
+              }}
+              className="project-slide"
+              key={project.slug}
+            >
+              {project.heroImage && (
+                <img className="slide-media slide-media--fallback" src={project.heroImage} alt="" />
+              )}
+              {project.heroVideo && (
+                <video
+                  ref={(el) => {
+                    videoRefs.current[index] = el;
+                    if (el && el.readyState >= 3) videosReadyRef.current = true;
+                  }}
+                  className="slide-media slide-media--video"
+                  src={shouldLoadVideo ? project.heroVideo : undefined}
+                  muted
+                  loop
+                  playsInline
+                  preload={shouldLoadVideo ? "auto" : "none"}
+                  onCanPlayThrough={() => { videosReadyRef.current = true; }}
+                />
+              )}
+              <span className="scrim" />
+            </article>
+          );
+        })}
         <span className="home-bottom-tv" aria-hidden="true" />
       </section>
 
