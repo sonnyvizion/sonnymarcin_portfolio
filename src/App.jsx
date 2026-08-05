@@ -21,7 +21,7 @@ const projects = [
     yearLabel: "26'",
     color: "#2A5843",
     heroVideo: `${import.meta.env.BASE_URL}img/arimont2.mp4`,
-    heroImage: "https://picsum.photos/seed/arimont/2200/1400",
+    heroImage: `${import.meta.env.BASE_URL}img/arimont2-hero.jpg`,
     detailImage: `${import.meta.env.BASE_URL}img/raidillon.webp`,
     gallery: [
       { type: "video", src: `${import.meta.env.BASE_URL}img/arimont_projet_01.mp4` },
@@ -50,7 +50,7 @@ const projects = [
     yearLabel: "26'",
     color: "#B24774",
     heroVideo: `${import.meta.env.BASE_URL}img/iphone-holora.mp4`,
-    heroImage: "https://picsum.photos/seed/holora/2200/1400",
+    heroImage: `${import.meta.env.BASE_URL}img/iphone-holora-hero.jpg`,
     detailImage: `${import.meta.env.BASE_URL}img/mockup_holora_bg.webp`,
     gallery: [
       { type: "video", src: `${import.meta.env.BASE_URL}img/holora_project01.mp4` },
@@ -83,8 +83,8 @@ const projects = [
     yearLabel: "26'",
     color: "#D65A35",
     heroVideo: `${import.meta.env.BASE_URL}img/ywp_home_1.mp4`,
-    heroImage: "https://picsum.photos/seed/ywp/2200/1400",
-    detailImage: "https://picsum.photos/seed/ywp-detail/2200/1400",
+    heroImage: `${import.meta.env.BASE_URL}img/ywp_home_1-hero.jpg`,
+    detailImage: `${import.meta.env.BASE_URL}img/ywp_home_1-hero.jpg`,
     gallery: [
       "https://picsum.photos/seed/ywp-1/640/420",
       "https://picsum.photos/seed/ywp-2/640/420",
@@ -141,7 +141,7 @@ const projects = [
     yearLabel: "26'",
     color: "#829DAD",
     heroVideo: `${import.meta.env.BASE_URL}img/hromone_home_1.mp4`,
-    heroImage: "https://picsum.photos/seed/hormone/2200/1400",
+    heroImage: `${import.meta.env.BASE_URL}img/hromone_home_1-hero.jpg`,
     detailImage: `${import.meta.env.BASE_URL}img/hormone_bg.webp`,
     gallery: [
       { type: "video", src: `${import.meta.env.BASE_URL}img/hormone_projet01.mp4` },
@@ -164,7 +164,7 @@ const projects = [
     yearLabel: "26'",
     color: "#4E58B8",
     heroVideo: `${import.meta.env.BASE_URL}img/kozy_left.mp4`,
-    heroImage: "https://picsum.photos/seed/kozy/2200/1400",
+    heroImage: `${import.meta.env.BASE_URL}img/kozy_left-hero.jpg`,
     detailImage: `${import.meta.env.BASE_URL}img/kozy_00000.webp`,
     gallery: [
       { type: "video", src: `${import.meta.env.BASE_URL}img/kozy_mockup.mp4` },
@@ -189,7 +189,7 @@ const projects = [
     color: "#FFFFFF",
     textColor: "#000000",
     heroVideo: `${import.meta.env.BASE_URL}img/brenda_home.mp4`,
-    heroImage: "https://picsum.photos/seed/brenda/2200/1400",
+    heroImage: `${import.meta.env.BASE_URL}img/brenda_home-hero.jpg`,
     detailImage: `${import.meta.env.BASE_URL}img/home_brenda.jpg`,
     gallery: [
       `${import.meta.env.BASE_URL}img/brenda-1.jpg`,
@@ -210,7 +210,7 @@ const projects = [
     yearLabel: "23'",
     color: "#7d8478",
     heroVideo: `${import.meta.env.BASE_URL}img/sonnyvizion2.mp4`,
-    heroImage: "https://picsum.photos/seed/sonnyvizion/2200/1400",
+    heroImage: `${import.meta.env.BASE_URL}img/sonnyvizion2-hero.jpg`,
     detailImage: `${import.meta.env.BASE_URL}img/work-3.jpg`,
     gallery: [
       `${import.meta.env.BASE_URL}img/pf02.jpg`,
@@ -225,22 +225,37 @@ const projects = [
   },
 ];
 
+const MOBILE_QUERY = "(max-width: 760px)";
+const LOADER_FAILSAFE_MS = 4000;
+
+const isMobileViewport = () => window.matchMedia(MOBILE_QUERY).matches;
+
+// Le CSS positionne en 100svh ; window.innerHeight suit la barre d'outils Safari
+// et diverge donc du svh. clientHeight correspond au viewport de mise en page,
+// c'est ce qui garde les rects GSAP alignés sur le CSS.
+const viewportHeight = () =>
+  document.documentElement.clientHeight || window.innerHeight;
+
+// -poster.jpg = vignette 300px (carousel) ; -hero.jpg = image 1280px (fond plein écran)
+const posterFor = (src) => src.replace(/\.mp4$/i, "-poster.jpg");
+const heroPosterFor = (src) => src.replace(/\.mp4$/i, "-hero.jpg");
+
 function getDetailCardRect() {
-  const isMobile = window.matchMedia("(max-width: 760px)").matches;
-  if (isMobile) {
+  if (isMobileViewport()) {
+    // doit refléter .project-card--detail en mobile : left/right 20, bottom 0, height 300
     return {
       left: 20,
-      top: window.innerHeight - 300,
-      width: Math.min(window.innerWidth - 40, 420),
+      top: viewportHeight() - 300,
+      width: window.innerWidth - 40,
       height: 300,
     };
   }
 
   const width = Math.min(474, window.innerWidth * 0.32);
-  const height = Math.min(654, window.innerHeight - 136);
+  const height = Math.min(654, viewportHeight() - 136);
   return {
     left: 68,
-    top: window.innerHeight - height - 68,
+    top: viewportHeight() - height - 68,
     width,
     height,
   };
@@ -251,18 +266,17 @@ function getHomeCardRect(cardNode) {
     return cardNode.getBoundingClientRect();
   }
 
-  const isMobile = window.matchMedia("(max-width: 760px)").matches;
-  if (isMobile) {
+  if (isMobileViewport()) {
     return {
       left: 20,
-      top: window.innerHeight - 404,
+      top: viewportHeight() - 404,
       width: window.innerWidth - 40,
       height: 300,
     };
   }
 
   const width = Math.min(474, window.innerWidth * 0.32);
-  const height = Math.min(654, window.innerHeight - 110);
+  const height = Math.min(654, viewportHeight() - 110);
   return {
     left: window.innerWidth - width - 67,
     top: 55,
@@ -272,17 +286,34 @@ function getHomeCardRect(cardNode) {
 }
 
 function getContactPanelRect() {
-  const isMobile = window.matchMedia("(max-width: 760px)").matches;
+  const isMobile = isMobileViewport();
   const width = isMobile
     ? Math.min(window.innerWidth - 40, 420)
     : Math.min(474, window.innerWidth - 136);
   const height = isMobile
-    ? Math.min(window.innerHeight - 160, 520)
-    : Math.min(654, window.innerHeight - 136);
+    ? Math.min(viewportHeight() - 160, 520)
+    : Math.min(654, viewportHeight() - 136);
 
   return {
     left: (window.innerWidth - width) / 2,
-    top: (window.innerHeight - height) / 2,
+    top: (viewportHeight() - height) / 2,
+    width,
+    height,
+  };
+}
+
+function getCaseStudyRect() {
+  const isMobile = isMobileViewport();
+  const width = isMobile
+    ? Math.min(window.innerWidth - 40, 420)
+    : Math.min(680, window.innerWidth - 136);
+  const height = isMobile
+    ? Math.min(viewportHeight() - 80, 560)
+    : Math.min(viewportHeight() - 100, 680);
+
+  return {
+    left: (window.innerWidth - width) / 2,
+    top: (viewportHeight() - height) / 2,
     width,
     height,
   };
@@ -464,7 +495,7 @@ function CsMediaItem({ item }) {
       <video
         className="detail-casestudy__img"
         src={src}
-        poster={src.replace(/\.mp4$/i, "-poster.jpg")}
+        poster={posterFor(src)}
         autoPlay
         muted
         loop
@@ -487,7 +518,7 @@ function CarouselThumb({ item, isActive, onActivate, portraitSrcsRef }) {
   };
 
   if (isGalleryVideo(item)) {
-    const poster = src.replace(/\.mp4$/i, "-poster.jpg");
+    const poster = posterFor(src);
     return (
       <button className={`${isActive ? "is-active" : ""} is-video`} onClick={handleClick} type="button" aria-label="Voir la vidéo">
         {posterFailed ? (
@@ -587,6 +618,22 @@ function App() {
 
   const activeProject = projects[activeIndex];
 
+  // Sur mobile "auto" ne sert à rien (iOS le ramène à metadata) et coûte des
+  // dizaines de Mo de data si le navigateur l'honore quand même.
+  const heroPreload = useMemo(
+    () => (typeof window !== "undefined" && isMobileViewport() ? "metadata" : "auto"),
+    [],
+  );
+
+  // Seule la vidéo affichée conditionne la sortie du loader. onError compte
+  // comme "prêt" : un décodage impossible ne doit pas bloquer l'entrée du site.
+  const markVideoReady = useCallback(
+    (index) => {
+      if (index === activeIndex) videosReadyRef.current = true;
+    },
+    [activeIndex],
+  );
+
   useEffect(() => {
     if (loaderDoneRef.current) return undefined;
 
@@ -635,7 +682,17 @@ function App() {
       });
     }, 96);
 
-    return () => window.clearInterval(interval);
+    // Filet de sécurité : iOS ignore preload="auto" et n'émet donc jamais
+    // canplaythrough tant que l'utilisateur n'a pas interagi. Sans ce timeout
+    // le loader reste bloqué à 95% indéfiniment.
+    const failsafe = window.setTimeout(() => {
+      videosReadyRef.current = true;
+    }, LOADER_FAILSAFE_MS);
+
+    return () => {
+      window.clearInterval(interval);
+      window.clearTimeout(failsafe);
+    };
   }, []);
 
   useEffect(() => {
@@ -934,6 +991,42 @@ function App() {
     };
   }, [activeIndex, isLoading, detailProject, isTransitioning, contactOpen, goToProject]);
 
+  // Les panneaux ouverts sont positionnés en styles inline par GSAP : sans ça
+  // ils gardent les dimensions de l'orientation précédente après une rotation.
+  useEffect(() => {
+    let timer;
+
+    const reposition = () => {
+      if (isTransitioning || contactTransitioning || caseStudyTransitioning) return;
+
+      if (contactOpen && contactPanelRef.current) {
+        gsap.set(contactPanelRef.current, getContactPanelRect());
+      }
+      if (caseStudyOpen && caseStudyRef.current) {
+        gsap.set(caseStudyRef.current, getCaseStudyRect());
+      }
+    };
+
+    const onResize = () => {
+      window.clearTimeout(timer);
+      timer = window.setTimeout(reposition, 150);
+    };
+
+    window.addEventListener("resize", onResize);
+    window.addEventListener("orientationchange", onResize);
+    return () => {
+      window.clearTimeout(timer);
+      window.removeEventListener("resize", onResize);
+      window.removeEventListener("orientationchange", onResize);
+    };
+  }, [
+    contactOpen,
+    caseStudyOpen,
+    isTransitioning,
+    contactTransitioning,
+    caseStudyTransitioning,
+  ]);
+
   const openProject = useCallback(() => {
     if (
       isLoading ||
@@ -1151,15 +1244,7 @@ function App() {
     if (!detailProject?.caseStudy || caseStudyOpen || caseStudyTransitioning || !caseStudyCtaRef.current || !caseStudyRef.current) return;
 
     const sourceRect = caseStudyCtaRef.current.getBoundingClientRect();
-    const isMobile = window.matchMedia("(max-width: 760px)").matches;
-    const w = isMobile ? Math.min(window.innerWidth - 40, 420) : Math.min(680, window.innerWidth - 136);
-    const h = isMobile ? Math.min(window.innerHeight - 80, 560) : Math.min(window.innerHeight - 100, 680);
-    const targetRect = {
-      left: (window.innerWidth - w) / 2,
-      top: (window.innerHeight - h) / 2,
-      width: w,
-      height: h,
-    };
+    const targetRect = getCaseStudyRect();
 
     setCaseStudyOpen(true);
     setCaseStudyTransitioning(true);
@@ -1518,15 +1603,19 @@ function App() {
                 <video
                   ref={(el) => {
                     videoRefs.current[index] = el;
-                    if (el && el.readyState >= 3) videosReadyRef.current = true;
+                    if (el && el.readyState >= 2) markVideoReady(index);
                   }}
                   className="slide-media slide-media--video"
                   src={shouldLoadVideo ? project.heroVideo : undefined}
+                  poster={heroPosterFor(project.heroVideo)}
                   muted
                   loop
                   playsInline
-                  preload={shouldLoadVideo ? "auto" : "none"}
-                  onCanPlayThrough={() => { videosReadyRef.current = true; }}
+                  preload={shouldLoadVideo ? heroPreload : "none"}
+                  onLoadedData={() => markVideoReady(index)}
+                  onCanPlay={() => markVideoReady(index)}
+                  onCanPlayThrough={() => markVideoReady(index)}
+                  onError={() => markVideoReady(index)}
                 />
               )}
               <span className="scrim" />

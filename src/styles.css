@@ -87,9 +87,24 @@ button:hover .hover-image__secondary {
 .app {
   position: relative;
   width: 100vw;
+  height: 100vh; /* repli iOS < 15.4, qui ne connait pas svh */
   height: 100svh;
   overflow: hidden;
+  overscroll-behavior: none;
   background: #111111;
+}
+
+/*
+ * Le swipe vertical navigue entre projets : il ne doit pas piloter en plus la
+ * barre d'outils Safari (ce qui fait varier innerHeight en pleine transition).
+ * Ciblé sur la seule surface de la home — un touch-action: none sur .app
+ * bloquerait aussi le scroll du carousel et de l'étude de cas, car un ancêtre
+ * en "none" empêche ses descendants de paner.
+ */
+.home-stage,
+.home-ui,
+.open-hit-area {
+  touch-action: none;
 }
 
 .loader {
@@ -104,6 +119,7 @@ button:hover .hover-image__secondary {
   top: 0;
   left: 0;
   width: 100vw;
+  height: 100vh; /* repli iOS < 15.4 */
   height: 100svh;
   overflow: hidden;
   background: #dfff00;
@@ -505,10 +521,12 @@ button:hover .hover-image__secondary {
   }
   40% {
     transform: scale(1.3);
+    box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.35);
     box-shadow: 0 0 0 4px color-mix(in srgb, currentColor 35%, transparent);
   }
   70% {
     transform: scale(1);
+    box-shadow: 0 0 0 7px rgba(255, 255, 255, 0);
     box-shadow: 0 0 0 7px color-mix(in srgb, currentColor 0%, transparent);
   }
 }
@@ -1180,12 +1198,16 @@ button:hover .hover-image__secondary {
   }
 
   .loader__center strong {
-    font-size: clamp(48px, 16vw, 76px);
+    font-size: clamp(34px, 11vw, 56px);
   }
 
   .loader__progress {
     right: 20px;
     bottom: 36px;
+  }
+
+  .loader__progress strong {
+    font-size: clamp(56px, 20vw, 92px);
   }
 
   .identity {
@@ -1312,12 +1334,34 @@ button:hover .hover-image__secondary {
     left: calc(20px + 22px);
   }
 
+  /*
+   * En absolu sans contrainte de hauteur, une description longue debordait
+   * dans le carousel puis sous la carte projet (le CTA "Etude de cas" se
+   * retrouvait par-dessus la carte). On borne la zone a la bande reellement
+   * libre — entre l'identite et le carousel — et on la rend scrollable.
+   * 368px = carousel (bottom 302) + sa hauteur (~58) + respiration.
+   */
   .detail-copy {
-    top: 118px;
+    top: 104px;
     right: 20px;
+    bottom: 368px;
     left: 20px;
     width: auto;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    scrollbar-width: none;
     text-align: left;
+    -webkit-mask-image: linear-gradient(180deg, #000 0, #000 88%, transparent 100%);
+    mask-image: linear-gradient(180deg, #000 0, #000 88%, transparent 100%);
+  }
+
+  .detail-copy::-webkit-scrollbar {
+    display: none;
+  }
+
+  .detail-view--focus .detail-copy {
+    /* en mode focus image la zone est masquee : pas de scroll fantome */
+    overflow-y: hidden;
   }
 
   .detail-copy h1 {
@@ -1355,6 +1399,24 @@ button:hover .hover-image__secondary {
   .carousel-control {
     width: 22px;
     height: 34px;
+  }
+
+  /*
+   * backdrop-filter + mix-blend-mode au-dessus d'une video plein ecran : tres
+   * couteux sur GPU mobile et source de bugs de compositing sur iOS Safari.
+   * Les degrades seuls rendent le meme effet pour une fraction du cout.
+   */
+  .home-bottom-tv,
+  .detail-bottom-tv {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    mix-blend-mode: normal;
+    opacity: 0.7;
+  }
+
+  .home-bottom-tv::after,
+  .detail-bottom-tv::after {
+    display: none;
   }
 }
 
@@ -1450,6 +1512,7 @@ button:hover .hover-image__secondary {
   justify-content: space-between;
   padding: 18px 36px;
   background: var(--cs-color, #111);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.14);
   border-bottom: 1px solid color-mix(in srgb, var(--cs-text, #fff) 14%, transparent);
 }
 
@@ -1529,6 +1592,7 @@ button:hover .hover-image__secondary {
 
 .detail-casestudy__role-tag {
   padding: 4px 10px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
   border: 1px solid color-mix(in srgb, var(--cs-text, #fff) 30%, transparent);
   font-family: var(--ui-font);
   font-size: 11px;
@@ -1605,6 +1669,7 @@ button:hover .hover-image__secondary {
 
 .detail-casestudy__step {
   padding: 20px;
+  background: rgba(255, 255, 255, 0.08);
   background: color-mix(in srgb, var(--cs-text, #fff) 8%, transparent);
 }
 
@@ -1660,6 +1725,17 @@ button:hover .hover-image__secondary {
 
   .detail-casestudy__body {
     font-size: 14px;
+  }
+}
+
+/* Sous 520px, deux colonnes ne laissent que ~130px de texte utile par etape. */
+@media (max-width: 520px) {
+  .detail-casestudy__steps {
+    grid-template-columns: 1fr;
+  }
+
+  .detail-casestudy__img-wrap {
+    grid-template-columns: 1fr;
   }
 }
 
