@@ -691,6 +691,36 @@ button:hover .hover-image__secondary {
   line-height: 0.76;
 }
 
+.year-roll {
+  display: inline-flex;
+}
+
+/* Neutralise `.project-card__year span` (taille/approche des libellés). */
+.project-card__year .year-roll,
+.project-card__year .year-roll span {
+  font-size: inherit;
+  letter-spacing: inherit;
+}
+
+/* Fenêtre d'un chiffre : 1em de haut pour ne pas rogner les glyphes, marges
+   négatives pour garder l'encombrement du line-height 0.76 d'origine. */
+.year-roll__slot {
+  display: inline-block;
+  overflow: hidden;
+  height: 1em;
+  margin: -0.12em 0;
+}
+
+.year-roll__strip,
+.year-roll__cell {
+  display: block;
+}
+
+.year-roll__cell {
+  height: 1em;
+  line-height: 1em;
+}
+
 .contact-button,
 .back-button {
   position: absolute;

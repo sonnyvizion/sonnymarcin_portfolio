@@ -337,11 +337,75 @@ function getWheelDirection(index, activeIndex) {
   return offset >= 0 ? 1 : -1;
 }
 
+// Millésime façon rouleau : chaque chiffre défile vers le haut à travers une
+// bande de chiffres croissants et décélère jusqu'à sa valeur. Les unités font
+// plus de tours que les dizaines, comme un vrai compteur.
+const YEAR_ROLL_STEPS = { units: 14, others: 5 };
+
+function yearRollStrip(digit, steps) {
+  const target = Number(digit);
+  return Array.from({ length: steps + 1 }, (_, i) => (target - steps + i + 100) % 10);
+}
+
+function YearLabel({ label }) {
+  const lastDigitIndex = label.search(/\d(?!.*\d)/);
+  return (
+    <span className="year-roll" aria-label={label}>
+      {label.split("").map((char, i) => {
+        if (!/\d/.test(char)) {
+          return (
+            <span aria-hidden="true" key={i}>
+              {char}
+            </span>
+          );
+        }
+        const steps = i === lastDigitIndex ? YEAR_ROLL_STEPS.units : YEAR_ROLL_STEPS.others;
+        // Cellules de 1em : la bande repose décalée de `steps` cellules.
+        const rest = `${-steps}em`;
+        return (
+          <span className="year-roll__slot" aria-hidden="true" key={i}>
+            <span
+              className="year-roll__strip"
+              data-rest={rest}
+              style={{ transform: `translateY(${rest})` }}
+            >
+              {yearRollStrip(char, steps).map((digit, j) => (
+                <span className="year-roll__cell" key={j}>
+                  {digit}
+                </span>
+              ))}
+            </span>
+          </span>
+        );
+      })}
+    </span>
+  );
+}
+
+function rollYear(cardNode, reduceMotion) {
+  const strips = gsap.utils.selector(cardNode)(".year-roll__strip");
+  gsap.killTweensOf(strips);
+  strips.forEach((strip, i) => {
+    const rest = strip.dataset.rest;
+    if (reduceMotion) {
+      gsap.set(strip, { y: rest });
+      return;
+    }
+    const isLast = i === strips.length - 1;
+    gsap.fromTo(
+      strip,
+      { y: "0em" },
+      { y: rest, duration: isLast ? 1.9 : 1.4, ease: "expo.out" },
+    );
+  });
+}
+
 function animateProjectCardContent(cardNode, direction = 1, reduceMotion = false) {
   if (!cardNode) return;
 
   const q = gsap.utils.selector(cardNode);
-  const titleAndDate = q(".card-motion-title, .card-motion-date");
+  const titleAndDate = q(".card-motion-title");
+  const date = q(".card-motion-date");
   const labels = q(".card-motion-label");
   const pills = q(".card-motion-pill");
   const hint = q(".card-motion-hint");
@@ -354,6 +418,8 @@ function animateProjectCardContent(cardNode, direction = 1, reduceMotion = false
     y: distance,
   });
   gsap.set(hint, { autoAlpha: 0, y: 0 });
+  gsap.set(date, { autoAlpha: 1, y: 0 });
+  rollYear(cardNode, reduceMotion);
 
   gsap
     .timeline({ defaults: { ease: "power3.out" } })
@@ -499,7 +565,9 @@ function ProjectCard({
         </span>
         <span className="project-card__year">
           <span className="card-motion-label">Portfolio</span>
-          <strong className="card-motion-date">{project.yearLabel}</strong>
+          <strong className="card-motion-date">
+            <YearLabel label={project.yearLabel} />
+          </strong>
         </span>
       </span>
     </button>
