@@ -621,11 +621,11 @@ button:hover .hover-image__secondary {
   content: "";
 }
 
-.project-card__hint span {
+.project-card__arrow {
   display: block;
-  width: 18px;
-  height: 1px;
-  background: currentColor;
+  width: 16px;
+  height: 10px;
+  flex-shrink: 0;
 }
 
 .project-card--home:hover .project-card__hint,

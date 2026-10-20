@@ -439,7 +439,9 @@ function ProjectCard({
           aria-hidden="true"
         >
           Voir le projet
-          <span />
+          <svg className="project-card__arrow" viewBox="0 0 16 10" aria-hidden="true">
+            <path d="M0 5h14M10 1l4 4-4 4" fill="none" stroke="currentColor" strokeWidth="1.3" />
+          </svg>
         </span>
         <span className="project-card__year">
           <span className="card-motion-label">Portfolio</span>
@@ -1828,7 +1830,9 @@ function App() {
                 style={{ "--live-bg": detailProject.textColor || "#ffffff", "--live-fill": detailProject.color }}
               >
                 Voir le site live
-                <span />
+                <svg className="project-card__arrow" viewBox="0 0 16 10" aria-hidden="true">
+                  <path d="M0 5h14M10 1l4 4-4 4" fill="none" stroke="currentColor" strokeWidth="1.3" />
+                </svg>
               </a>
             ) : detailProject.comingSoon ? (
               <span className="project-card__hint project-card__live-link detail-focus-hide" style={{ opacity: 0.5, cursor: "default" }}>
