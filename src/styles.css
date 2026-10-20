@@ -642,6 +642,22 @@ button:hover .hover-image__secondary {
   transform: scaleY(1);
 }
 
+/* « Voir le projet » : sens inverse — vide au repos (bordure + texte de la
+   couleur de texte du projet), il se remplit de cette couleur au hover. */
+.project-card--home .project-card__hint {
+  background: transparent;
+  color: var(--live-bg, #ffffff);
+}
+
+.project-card--home .project-card__hint::before {
+  background: var(--live-bg, #ffffff);
+}
+
+.project-card--home:hover .project-card__hint,
+.project-card--home:focus-visible .project-card__hint {
+  color: var(--live-fill, #111111);
+}
+
 .project-card--transition .project-card__hint,
 .project-card--detail .project-card__hint {
   display: none;
