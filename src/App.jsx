@@ -404,7 +404,12 @@ function ProjectCard({
     <button
       ref={forwardedRef}
       className={`project-card ${className}`}
-      style={{ backgroundColor: project.color, color: project.textColor || undefined }}
+      style={{
+        backgroundColor: project.color,
+        color: project.textColor || undefined,
+        "--live-bg": project.textColor || "#ffffff",
+        "--live-fill": project.color,
+      }}
       onClick={onClick}
       type="button"
       aria-label={`Voir le projet ${project.navTitle}`}

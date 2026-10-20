@@ -582,22 +582,43 @@ button:hover .hover-image__secondary {
   white-space: nowrap;
 }
 
+/* Bouton plein partagé par « Voir le projet » (carte home) et « Voir le site
+   live » (fiche) : même remplissage que .back-button, couleurs inversées —
+   fond = couleur de texte du projet, remplissage au hover = couleur du projet.
+   Les couleurs arrivent via --live-bg / --live-fill posées en inline. */
 .project-card__hint {
   position: absolute;
   bottom: 0;
   left: 0;
+  z-index: 1;
   display: inline-flex;
   align-items: center;
   gap: 9px;
-  color: currentColor;
-  font-size: 12px;
+  overflow: hidden;
+  height: 40px;
+  padding: 0 20px;
+  border: 1px solid var(--live-bg, #ffffff);
+  background: var(--live-bg, #ffffff);
+  color: var(--live-fill, #111111);
+  font-family: var(--ui-font);
+  font-size: 13px;
   font-weight: 700;
+  letter-spacing: 0.06em;
   line-height: 1;
+  text-decoration: none;
   text-transform: uppercase;
-  opacity: 0.74;
-  transition:
-    opacity 220ms ease,
-    transform 220ms ease;
+  transition: color 180ms ease;
+}
+
+.project-card__hint::before {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--live-fill, #111111);
+  transform: scaleY(0);
+  transform-origin: center bottom;
+  transition: transform 420ms cubic-bezier(0.22, 1, 0.36, 1);
+  content: "";
 }
 
 .project-card__hint span {
@@ -605,18 +626,20 @@ button:hover .hover-image__secondary {
   width: 18px;
   height: 1px;
   background: currentColor;
-  transition: width 220ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .project-card--home:hover .project-card__hint,
-.project-card--home:focus-visible .project-card__hint {
-  opacity: 1;
-  transform: translateX(2px);
+.project-card--home:focus-visible .project-card__hint,
+.project-card__live-link:hover,
+.project-card__live-link:focus-visible {
+  color: var(--live-bg, #ffffff);
 }
 
-.project-card--home:hover .project-card__hint span,
-.project-card--home:focus-visible .project-card__hint span {
-  width: 26px;
+.project-card--home:hover .project-card__hint::before,
+.project-card--home:focus-visible .project-card__hint::before,
+.project-card__live-link:hover::before,
+.project-card__live-link:focus-visible::before {
+  transform: scaleY(1);
 }
 
 .project-card--transition .project-card__hint,
@@ -629,44 +652,7 @@ button:hover .hover-image__secondary {
   left: calc(var(--outer) + 40px);
   bottom: calc(68px + 42px);
   z-index: 26;
-  overflow: hidden;
-  height: 40px;
-  padding: 0 20px;
-  border: 1px solid var(--live-bg, #ffffff);
-  background: var(--live-bg, #ffffff);
-  color: var(--live-fill, #111111);
-  font-family: var(--ui-font);
-  font-size: 13px;
-  letter-spacing: 0.06em;
-  text-decoration: none;
-  opacity: 1;
   pointer-events: auto;
-  transition: color 180ms ease;
-}
-
-/* Même remplissage que .back-button, couleurs inversées : fond = couleur
-   de texte du projet, remplissage au hover = couleur du projet. */
-.project-card__live-link::before {
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  background: var(--live-fill, #111111);
-  transform: scaleY(0);
-  transform-origin: center bottom;
-  transition: transform 420ms cubic-bezier(0.22, 1, 0.36, 1);
-  content: "";
-}
-
-.project-card__live-link:hover,
-.project-card__live-link:focus-visible {
-  opacity: 1;
-  color: var(--live-bg, #ffffff);
-  transform: none;
-}
-
-.project-card__live-link:hover::before,
-.project-card__live-link:focus-visible::before {
-  transform: scaleY(1);
 }
 
 .project-card__year {
@@ -1302,6 +1288,8 @@ button:hover .hover-image__secondary {
   .project-card__hint {
     bottom: 0;
     left: 0;
+    height: 32px;
+    padding: 0 14px;
     font-size: 10px;
   }
 
