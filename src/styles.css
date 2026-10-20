@@ -629,14 +629,29 @@ button:hover .hover-image__secondary {
   left: calc(var(--outer) + 40px);
   bottom: calc(68px + 42px);
   z-index: 26;
+  height: 40px;
+  padding: 0 20px;
+  background: #ffffff;
+  color: #0b0b0b;
+  font-family: var(--ui-font);
+  font-size: 13px;
+  letter-spacing: 0.06em;
   text-decoration: none;
+  opacity: 1;
   pointer-events: auto;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.35);
+  transition:
+    background 220ms ease,
+    color 220ms ease,
+    box-shadow 220ms ease,
+    transform 220ms ease;
 }
 
 .project-card__live-link:hover {
-  opacity: 1;
+  background: #0b0b0b;
   color: #ffffff;
-  transform: translateX(2px);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 34px rgba(0, 0, 0, 0.5);
 }
 
 .project-card__live-link:hover span {
