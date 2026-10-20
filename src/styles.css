@@ -629,33 +629,44 @@ button:hover .hover-image__secondary {
   left: calc(var(--outer) + 40px);
   bottom: calc(68px + 42px);
   z-index: 26;
+  overflow: hidden;
   height: 40px;
   padding: 0 20px;
-  background: #ffffff;
-  color: #0b0b0b;
+  border: 1px solid var(--live-bg, #ffffff);
+  background: var(--live-bg, #ffffff);
+  color: var(--live-fill, #111111);
   font-family: var(--ui-font);
   font-size: 13px;
   letter-spacing: 0.06em;
   text-decoration: none;
   opacity: 1;
   pointer-events: auto;
-  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.35);
-  transition:
-    background 220ms ease,
-    color 220ms ease,
-    box-shadow 220ms ease,
-    transform 220ms ease;
+  transition: color 180ms ease;
 }
 
-.project-card__live-link:hover {
-  background: #0b0b0b;
-  color: #ffffff;
-  transform: translateY(-2px);
-  box-shadow: 0 12px 34px rgba(0, 0, 0, 0.5);
+/* Même remplissage que .back-button, couleurs inversées : fond = couleur
+   de texte du projet, remplissage au hover = couleur du projet. */
+.project-card__live-link::before {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--live-fill, #111111);
+  transform: scaleY(0);
+  transform-origin: center bottom;
+  transition: transform 420ms cubic-bezier(0.22, 1, 0.36, 1);
+  content: "";
 }
 
-.project-card__live-link:hover span {
-  width: 26px;
+.project-card__live-link:hover,
+.project-card__live-link:focus-visible {
+  opacity: 1;
+  color: var(--live-bg, #ffffff);
+  transform: none;
+}
+
+.project-card__live-link:hover::before,
+.project-card__live-link:focus-visible::before {
+  transform: scaleY(1);
 }
 
 .project-card__year {

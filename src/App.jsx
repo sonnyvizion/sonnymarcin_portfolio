@@ -1820,6 +1820,7 @@ function App() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="project-card__hint project-card__live-link detail-focus-hide"
+                style={{ "--live-bg": detailProject.textColor || "#ffffff", "--live-fill": detailProject.color }}
               >
                 Voir le site live
                 <span />
