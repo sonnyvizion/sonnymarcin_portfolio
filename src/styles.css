@@ -918,6 +918,27 @@ button:hover .hover-image__secondary {
   letter-spacing: 0.06em;
 }
 
+.project-counter__index {
+  display: inline-flex;
+}
+
+.rolling-digit {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  line-height: 1.2;
+}
+
+.rolling-digit__current {
+  display: inline-block;
+}
+
+.rolling-digit__out {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
 .project-counter__bar {
   display: block;
   width: 28px;

@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import gsap from "gsap";
 
 const projects = [
@@ -379,6 +379,60 @@ function animateProjectCardContent(cardNode, direction = 1, reduceMotion = false
     );
 }
 
+// Compteur façon rouleau mécanique : chaque chiffre qui change sort par le
+// haut (ou le bas) pendant que le nouveau arrive du côté opposé, dans le sens
+// de la pellicule. Les chiffres inchangés ne bougent pas.
+function RollingNumber({ value, direction = 1, reduceMotion = false }) {
+  const prevRef = useRef(value);
+  const slotsRef = useRef([]);
+
+  useLayoutEffect(() => {
+    const prev = prevRef.current;
+    prevRef.current = value;
+    if (prev === value) return;
+
+    value.split("").forEach((char, i) => {
+      const slot = slotsRef.current[i];
+      if (!slot || prev[i] === char) return;
+      const current = slot.querySelector(".rolling-digit__current");
+      slot.querySelectorAll(".rolling-digit__out").forEach((node) => {
+        gsap.killTweensOf(node);
+        node.remove();
+      });
+      gsap.killTweensOf(current);
+      if (reduceMotion || prev[i] === undefined) {
+        gsap.set(current, { yPercent: 0 });
+        return;
+      }
+
+      const outgoing = document.createElement("span");
+      outgoing.className = "rolling-digit__out";
+      outgoing.textContent = prev[i];
+      slot.appendChild(outgoing);
+
+      const tween = { duration: 0.9, ease: "expo.out" };
+      gsap.fromTo(current, { yPercent: 100 * direction }, { yPercent: 0, ...tween });
+      gsap.to(outgoing, {
+        yPercent: -100 * direction,
+        ...tween,
+        onComplete: () => outgoing.remove(),
+      });
+    });
+  }, [value, direction, reduceMotion]);
+
+  return value.split("").map((char, i) => (
+    <span
+      className="rolling-digit"
+      key={i}
+      ref={(node) => {
+        slotsRef.current[i] = node;
+      }}
+    >
+      <span className="rolling-digit__current">{char}</span>
+    </span>
+  ));
+}
+
 function Identity({ onClick }) {
   return (
     <button
@@ -578,6 +632,9 @@ function getFullGallery(project) {
 
 function App() {
   const [activeIndex, setActiveIndex] = useState(3);
+  // Le compteur change dès le début de la transition (activeIndex, lui, ne
+  // bascule qu'à mi-parcours) pour rouler en même temps que la pellicule.
+  const [counter, setCounter] = useState({ index: 3, direction: 1 });
   const [isLoading, setIsLoading] = useState(true);
   const [loadProgress, setLoadProgress] = useState(0);
   const [detailProject, setDetailProject] = useState(null);
@@ -788,6 +845,7 @@ function App() {
       if (!currentSlide || !nextSlide) return;
 
       scrollStateRef.current.lock = true;
+      setCounter({ index: nextIndex, direction });
       gsap.killTweensOf(stageRef.current);
       gsap.set(stageRef.current, { y: 0 });
       const wipeEl = cardRef.current?.querySelector(".project-card__wipe");
@@ -1708,7 +1766,11 @@ function App() {
           aria-label="Projet suivant"
         >
           <span className="project-counter__index">
-            {String(activeIndex + 1).padStart(2, "0")}
+            <RollingNumber
+              value={String(counter.index + 1).padStart(2, "0")}
+              direction={counter.direction}
+              reduceMotion={reduceMotion}
+            />
           </span>
           <span className="project-counter__bar" aria-hidden="true" />
           <span className="project-counter__total">
