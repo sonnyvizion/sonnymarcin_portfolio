@@ -689,6 +689,9 @@ button:hover .hover-image__secondary {
   font-size: clamp(64px, 7.2vw, 124px);
   font-weight: 800;
   line-height: 0.76;
+  /* Compense l'espace sous la ligne de base : le bas des chiffres tombe pile
+     sur le bas du bouton « Voir le projet ». */
+  margin-bottom: -0.125em;
 }
 
 .year-roll {
